@@ -11,7 +11,7 @@ class App extends Component {
                     <Container style={{marginTop: "100px", minHeight: "85vh"}}>
                         <Switch>
                             <Route exact path="/signup" component={SignUpPage}/>
-                            <Redirect to="/app"/>
+                            <Redirect to="/signup"/>
                         </Switch>
                     </Container>
                 </div>
