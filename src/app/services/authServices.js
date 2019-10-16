@@ -5,23 +5,21 @@ const authlogin = async (payload) => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({mail,password})
     };
-    const response = await fetch('/api/register', options);
+    const response = await fetch('/auth/login', options);
     handleResponse(response);
     const user = undefined;
     if (user && user.token) {
         localStorage.setItem('user', JSON.stringify(user));
     }
     return user;
-}
-
+};
 
 const handleResponse= (response) => {
     if (!response.ok) { 
         return Promise.reject(response.statusText);
     }
-
     return response.json();
-}
+};
 
 async function authLogout() {
     // remove user from local storage to log user out
@@ -30,7 +28,7 @@ async function authLogout() {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}        
     };
-    const response = await fetch('/api/auth/logout', options);
+    const response = await fetch('/auth/logout', options);
     handleResponse(response);
     const user = undefined;
     if (user && user.token) {
@@ -46,16 +44,16 @@ async function authRegister(signupPayload) {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(signupPayload)
     };
-    const response = await fetch('/api/auth/register', options);
+    const response = await fetch('/auth/register', options);
     handleResponse(response);
     const info = undefined;   
     return info;
 }
 
-const loginService = {
+const authServices = {
     login: authlogin,
     logout: authLogout,
     register: authRegister
-}
+};
 
-export default loginService;
+export default authServices;

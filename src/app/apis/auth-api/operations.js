@@ -1,5 +1,5 @@
 import {Creators} from "./actions";
-import LoginService from '../../services/loginService'
+import LoginService from '../../services/authServices'
 
 const signupRequest = Creators.signupRequest;
 const signupSuccess = Creators.signupSuccess;
@@ -18,7 +18,7 @@ const signupOperation = signupPayload => {
             .catch(err => {
                 dispatch(signupFailure(err));
                 new Error('signup error ', err);
-            })        
+            })
     };
 };
 
