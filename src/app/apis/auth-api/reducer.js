@@ -1,38 +1,69 @@
-import types from "./types";
+import { createReducer } from 'reduxsauce';
+import Types from "./types";
 
-const INITIAL_STATE = {};
+const INITIAL_STATE =  { error: false, goodies: null };
 
-const authReducer = (state = INITIAL_STATE, action) => {
-    switch (action.type) {
+export const signupRequest = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        showSpinner: true
+    };
+}
 
-        case types.SIGNUP_REQUEST: {
-            return {
-                ...state,
-                showSpinner: true
-            };
-        }
+export const signupSuccess = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        showSpinner: true
+    };
+}
 
-        case types.SIGNUP_SUCCESS: {
-            const {signupResponse} = action;
-            console.log("SIGNUP_SUCCESS: ", signupResponse);
-            return {
-                ...state,
-                signupSuccess: true,
-                showSpinner: false
-            };
-        }
+export const signupFailure = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        showSpinner: true
+    };
+}
 
-        case types.SIGNUP_FAILURE: {
-            return {
-                ...state,
-                showSpinner: false,
-                signupError: "SIGNUP Failed"
-            };
-        }
+export const HANDLERS = {
+    [Types.SIGNUP_REQUEST]: signupRequest,
+    [Types.SIGNUP_SUCCESS]: signupSuccess,
+    [Types.SIGNUP_FAILURE]: signupFailure,
+  }
+  
+  export default createReducer(INITIAL_STATE, HANDLERS)
 
-        default:
-            return state;
-    }
-};
 
-export default authReducer;
+// const authReducer = (state = INITIAL_STATE, action) => {
+//     switch (action.type) {
+
+//         case types.SIGNUP_REQUEST: {
+//             return {
+//                 ...state,
+//                 showSpinner: true
+//             };
+//         }
+
+//         case types.SIGNUP_SUCCESS: {
+//             const {signupResponse} = action;
+//             console.log("SIGNUP_SUCCESS: ", signupResponse);
+//             return {
+//                 ...state,
+//                 signupSuccess: true,
+//                 showSpinner: false
+//             };
+//         }
+
+//         case types.SIGNUP_FAILURE: {
+//             return {
+//                 ...state,
+//                 showSpinner: false,
+//                 signupError: "SIGNUP Failed"
+//             };
+//         }
+
+//         default:
+//             return state;
+//     }
+// };
+
+// export default authReducer;

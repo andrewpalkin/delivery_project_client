@@ -26,3 +26,5 @@ yarn-error.log*
 /yarn.lock
 /package-lock.json
 /delivery_project_client_new.iml
+
+/.vscode/

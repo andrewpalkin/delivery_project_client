@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./reducers";
 import logger from "redux-logger";
+import thunk from "redux-thunk";
 
 /* eslint-disable no-underscore-dangle */
 const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
@@ -16,6 +17,7 @@ const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(
+      thunk,
       logger
     ),
     devtoolMiddleware
