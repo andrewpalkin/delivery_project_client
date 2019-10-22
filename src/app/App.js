@@ -1,7 +1,9 @@
 import React, {Component} from "react";
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {Container} from "semantic-ui-react";
+import HomePage from "./pages/page-home/home.Page";
 import SignUpPage from "./pages/page-signup/signup.Page";
+import SigninPage from "./pages/page-signin/signin.Page";
 
 class App extends Component {
     render() {
@@ -10,8 +12,10 @@ class App extends Component {
                 <div>
                     <Container style={{marginTop: "100px", minHeight: "85vh"}}>
                         <Switch>
+                            <Route exact path="/" component={HomePage}/>
                             <Route exact path="/signup" component={SignUpPage}/>
-                            <Redirect to="/signup"/>
+                            <Route exact path="/signin" component={SigninPage}/>
+                                                        
                         </Switch>
                     </Container>
                 </div>

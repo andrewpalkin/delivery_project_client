@@ -3,15 +3,13 @@ import SignUpMainComponent from "./signup.Component";
 import { authOperations } from "../../apis/auth-api";
 
 const mapStateToProps = state => {
-    return {
-        auth: true
+    return {                
+        singUp: state.auth.singUp
     };
 };
 
 const mapDispatchToProps = dispatch => {
-    const signup = signupPayload => {
-        console.log("signupContiner-> signupPayload: ", signupPayload);
-        //dispatch(submitWishOperations.submitWishOperation(loginFormData));
+    const signup = signupPayload => {              
         dispatch(authOperations.signupOperation(signupPayload));
     };
 

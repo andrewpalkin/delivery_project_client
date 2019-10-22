@@ -1,3 +1,5 @@
+
+const registerService = 'http://localhost:8000';
 const authlogin = async (payload) => {
     const {mail, password} = payload;
     const options = {
@@ -5,7 +7,7 @@ const authlogin = async (payload) => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({mail,password})
     };
-    const response = await fetch('/api/register', options);
+    const response = await fetch(registerService+'/auth/register', options);
     handleResponse(response);
     const user = undefined;
     if (user && user.token) {
@@ -20,7 +22,7 @@ const handleResponse= (response) => {
         return Promise.reject(response.statusText);
     }
 
-    return response.json();
+    return response;
 }
 
 async function authLogout() {
@@ -30,7 +32,7 @@ async function authLogout() {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}        
     };
-    const response = await fetch('/api/auth/logout', options);
+    const response = await fetch(registerService + '/auth/logout', options);
     handleResponse(response);
     const user = undefined;
     if (user && user.token) {
@@ -46,10 +48,9 @@ async function authRegister(signupPayload) {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(signupPayload)
     };
-    const response = await fetch('/api/auth/register', options);
-    handleResponse(response);
-    const info = undefined;   
-    return info;
+    const response = await fetch(registerService+'/auth/register', options);
+    handleResponse(response);    
+    return handleResponse(response);   ;
 }
 
 const loginService = {

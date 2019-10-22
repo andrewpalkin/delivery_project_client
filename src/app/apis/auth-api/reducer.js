@@ -1,7 +1,7 @@
 import { createReducer } from 'reduxsauce';
 import Types from "./types";
 
-const INITIAL_STATE =  { error: false, goodies: null };
+const INITIAL_STATE =  { error: false, singUp: false };
 
 export const signupRequest = (state = INITIAL_STATE, action) => {
     return {
@@ -13,14 +13,18 @@ export const signupRequest = (state = INITIAL_STATE, action) => {
 export const signupSuccess = (state = INITIAL_STATE, action) => {
     return {
         ...state,
-        showSpinner: true
+        showSpinner: true,
+        loggedIn: false,
+        authConfirmation: false,
+        singUp: true
     };
 }
 
 export const signupFailure = (state = INITIAL_STATE, action) => {
     return {
         ...state,
-        showSpinner: true
+        showSpinner: true,
+        loggedIn: false,        
     };
 }
 

@@ -5,8 +5,8 @@ import SignupForm from "./signup.Form";
 const onSubmitLogin = () => {};
 
 const Signup = props => {
-    return props.auth.uid ? (
-        <Redirect to="/app" />
+    return props.singUp ? (
+        <Redirect to="/" />
     ) : (
         <SignupForm signup={props.signup} onSubmit={onSubmitLogin} />
     );

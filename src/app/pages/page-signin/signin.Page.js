@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import SignUpMainContainer from "../../components/component-signup/signup.Container";
+import LoginMainContainer from "../../components/component-login";
 
-class SignUpPage extends Component {
+class LoginPage extends Component {
     render() {
         return (
-            <SignUpMainContainer />
+            <LoginMainContainer />
         );
     }
 }
 
-export default SignUpPage;
+export default LoginPage;
