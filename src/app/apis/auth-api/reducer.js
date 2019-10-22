@@ -1,4 +1,4 @@
-import { createReducer } from 'reduxsauce';
+import {createReducer} from 'reduxsauce';
 import Types from "./types";
 
 const INITIAL_STATE =  { error: false, singUp: false };
@@ -8,7 +8,7 @@ export const signupRequest = (state = INITIAL_STATE, action) => {
         ...state,
         showSpinner: true
     };
-}
+};
 
 export const signupSuccess = (state = INITIAL_STATE, action) => {
     return {
@@ -18,7 +18,7 @@ export const signupSuccess = (state = INITIAL_STATE, action) => {
         authConfirmation: false,
         singUp: true
     };
-}
+};
 
 export const signupFailure = (state = INITIAL_STATE, action) => {
     return {
@@ -26,48 +26,12 @@ export const signupFailure = (state = INITIAL_STATE, action) => {
         showSpinner: true,
         loggedIn: false,        
     };
-}
+};
 
 export const HANDLERS = {
     [Types.SIGNUP_REQUEST]: signupRequest,
     [Types.SIGNUP_SUCCESS]: signupSuccess,
     [Types.SIGNUP_FAILURE]: signupFailure,
-  }
-  
-  export default createReducer(INITIAL_STATE, HANDLERS)
+};
 
-
-// const authReducer = (state = INITIAL_STATE, action) => {
-//     switch (action.type) {
-
-//         case types.SIGNUP_REQUEST: {
-//             return {
-//                 ...state,
-//                 showSpinner: true
-//             };
-//         }
-
-//         case types.SIGNUP_SUCCESS: {
-//             const {signupResponse} = action;
-//             console.log("SIGNUP_SUCCESS: ", signupResponse);
-//             return {
-//                 ...state,
-//                 signupSuccess: true,
-//                 showSpinner: false
-//             };
-//         }
-
-//         case types.SIGNUP_FAILURE: {
-//             return {
-//                 ...state,
-//                 showSpinner: false,
-//                 signupError: "SIGNUP Failed"
-//             };
-//         }
-
-//         default:
-//             return state;
-//     }
-// };
-
-// export default authReducer;
+export default createReducer(INITIAL_STATE, HANDLERS)
