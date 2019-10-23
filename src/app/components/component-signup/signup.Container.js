@@ -4,7 +4,7 @@ import { authOperations } from "../../apis/auth-api";
 
 const mapStateToProps = state => {
     return {                
-        singUp: state.auth.singUp
+        user: state.auth.user
     };
 };
 

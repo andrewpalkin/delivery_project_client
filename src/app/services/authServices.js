@@ -1,13 +1,13 @@
+import Request from './utils/baseService';
 
-const registerService = 'http://localhost:8000';
 const authlogin = async (payload) => {
     const {mail, password} = payload;
     const options = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({mail,password})
+        body: JSON.stringify({mail, password})
     };
-    const response = await fetch(registerService+'/auth/register', options);
+    const response = await fetch('/auth/register', options);
     handleResponse(response);
     const user = undefined;
     if (user && user.token) {
@@ -16,8 +16,8 @@ const authlogin = async (payload) => {
     return user;
 };
 
-const handleResponse= (response) => {
-    if (!response.ok) { 
+const handleResponse = (response) => {
+    if (!response.ok) {
         return Promise.reject(response.statusText);
     }
 
@@ -29,9 +29,9 @@ async function authLogout() {
     localStorage.removeItem('user');
     const options = {
         method: 'GET',
-        headers: {'Content-Type': 'application/json'}        
+        headers: {'Content-Type': 'application/json'}
     };
-    const response = await fetch(registerService + '/auth/logout', options);
+    const response = await fetch('/auth/logout', options);
     handleResponse(response);
     const user = undefined;
     if (user && user.token) {
@@ -40,16 +40,8 @@ async function authLogout() {
     return user;
 }
 
-async function authRegister(signupPayload) {
-    // remove user from local storage to log user out    
-    const options = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(signupPayload)
-    };
-    const response = await fetch(registerService+'/auth/register', options);
-    handleResponse(response);    
-    return handleResponse(response);   ;
+async function authRegister(payload) {
+        return await Request().post('/auth/register', payload);    
 }
 
 const authServices = {

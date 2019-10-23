@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Form, Grid, Header, Message, Segment} from "semantic-ui-react";
+import {Button, Form, Grid, Header, Segment} from "semantic-ui-react";
 
 import {Field, reduxForm} from "redux-form";
 
@@ -9,12 +9,12 @@ const LoginForm = props => {
     const {handleSubmit, login} = props;
     return (
         <div className="login-form">
-                    {/*
+            {/*
               Heads up! The styles below are necessary for the correct render of this example.
               You can do same with CSS, the main idea is that all the elements up to the `Grid`
               below must have a height of 100%.
             */}
-              <style>{`
+            <style>{`
                   body > div,
                   body > div > div,
                   body > div > div > div.login-form {
@@ -46,12 +46,12 @@ const LoginForm = props => {
                                 iconPosition="left"
                                 placeholder="Password"
                                 type="password"
-                            />                            
+                            />
                             <Button color="teal" fluid size="large">
                                 Login up
                             </Button>
                         </Segment>
-                    </Form>                   
+                    </Form>
                 </Grid.Column>
             </Grid>
         </div>
