@@ -1,6 +1,3 @@
-import {    
-    Redirect    
-  } from "react-router-dom";
 import {Creators} from "./actions";
 import LoginService from '../../services/authServices'
 
@@ -17,12 +14,12 @@ const signupOperation = signupPayload => {
             .then(response => {
                 if (response.ok) {
                     dispatch(signupSuccess(response.ok));
-                }                
+                }
                 // redireect to home page and if user is not approved display message                 
             })
             .catch(err => {
                 dispatch(signupFailure(err));
-                new Error('signup error ', err);
+                new Error('signup error: ', err);
             })
     };
 };
@@ -36,12 +33,12 @@ const loginOperation = signupPayload => {
             .then(response => {
                 if (response.ok) {
                     dispatch(signupSuccess(response.ok));
-                }                                             
+                }
             })
             .catch(err => {
                 dispatch(signupFailure(err));
-                new Error('signup error ', err);
-            })        
+                new Error('signup error: ', err);
+            })
     };
 };
 
@@ -50,7 +47,7 @@ const logoutOperation = () => {
         LoginService.logout();
         dispatch(signupFailure())
     }
-}
+};
 
 export default {
     signupOperation,
