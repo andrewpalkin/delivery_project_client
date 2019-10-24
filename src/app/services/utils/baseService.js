@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const request = () => {    
+const request = () => {
     const customRequest = axios.create({
         baseURL: 'http://localhost:8000',
         timeout: 15000,
@@ -9,20 +9,19 @@ const request = () => {
         }
     });
 
-
     const responseNormalize = (response) => {
         const {data} = response;
         if (data) {
             return {
                 data,
-                error: false,                
+                error: false,
             }
         }
         return {
-            error: true,  
-            data: null                        
-        }           
-    }
+            error: true,
+            data: null
+        }
+    };
 
     const errorResponseNormalize = (error) => {
         const {response} = error;
@@ -36,8 +35,9 @@ const request = () => {
                 errorName: response.data.name,
             }
         }
-        return errorData;        
-    }
+        return errorData;
+    };
+
     // abstract method to treat respnse, allow supply own strategy to serve response data in any case
     const getMethod = (url, config, normalize = responseNormalize, errorNormalize = errorResponseNormalize) => {
         return customRequest.get(url, config).then(response => {
@@ -45,7 +45,7 @@ const request = () => {
         }).catch(error => {
             return errorNormalize(error)
         })
-    }
+    };
 
     const postMethod = (url, data, config, normalize = responseNormalize, errorNormalize = errorResponseNormalize) => {
         return customRequest.post(url, data, config).then(response => {
@@ -54,7 +54,8 @@ const request = () => {
             return errorNormalize(error)
         })
 
-    }
+    };
+
     const patchMethod = (url, data, config, normalize = responseNormalize, errorNormalize = errorResponseNormalize) => {
         return customRequest.patch(url, data, config).then(response => {
             return normalize(response);
@@ -62,7 +63,7 @@ const request = () => {
             return errorNormalize(error)
         })
 
-    }
+    };
 
     const deleteMethod = (url, config, normalize = responseNormalize, errorNormalize = errorResponseNormalize) => {
         return customRequest.delete(url, config).then(response => {
@@ -71,7 +72,7 @@ const request = () => {
             return errorNormalize(error)
         })
 
-    }
+    };
 
     return {
         get: getMethod,
@@ -79,6 +80,6 @@ const request = () => {
         patch: patchMethod,
         delete: deleteMethod
     }
-}
+};
 
-export default  request;
+export default request;

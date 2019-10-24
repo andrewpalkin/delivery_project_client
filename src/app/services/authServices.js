@@ -22,7 +22,7 @@ const handleResponse = (response) => {
     }
 
     return response;
-}
+};
 
 async function authLogout() {
     // remove user from local storage to log user out
@@ -41,7 +41,7 @@ async function authLogout() {
 }
 
 async function authRegister(payload) {
-        return await Request().post('/auth/register', payload);    
+    return await Request().post('/auth/register', payload);
 }
 
 const authServices = {

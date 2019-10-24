@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import LoggonMainComponent from "./login.component";
+import LoginMainComponent from "./login.component";
 import { authOperations } from "../../apis/auth-api";
 
 const mapStateToProps = state => {
@@ -21,6 +21,6 @@ const mapDispatchToProps = dispatch => {
 const LoginMainContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoggonMainComponent);
+)(LoginMainComponent);
 
 export default LoginMainContainer;
