@@ -4,6 +4,10 @@ import LoginService from '../../services/authServices'
 const signupRequest = Creators.signupRequest;
 const signupSuccess = Creators.signupSuccess;
 const signupFailure = Creators.signupFailure;
+// Login handlers
+const loginRequest = Creators.loginRequest;
+const loginSuccess = Creators.loginSuccess;
+const loginFailure = Creators.loginFailure;
 
 const signupOperation = signupPayload => {
     return async (dispatch) => {
@@ -19,25 +23,27 @@ const signupOperation = signupPayload => {
             }           
         } catch (err){
             dispatch(signupFailure(err));
+            throw Error('registry fail');
         }        
     };
 };
 
 const loginOperation = signupPayload => {
-    return (dispatch) => {
+    return async (dispatch) => {
         // Dispatching this action will toggle the 'showRedditSpinner'
         // flag in the store, so that the UI can show a loading icon.
-        dispatch(signupRequest());
-        LoginService.register(signupPayload)
-            .then(response => {
-                if (response.ok) {
-                    dispatch(signupSuccess(response.ok));
-                }
-            })
-            .catch(err => {
-                dispatch(signupFailure(err));
-                new Error('signup error: ', err);
-            })
+        dispatch(loginRequest());    
+        try {
+            const res = await LoginService.authlogin(signupPayload);
+            if (res.error) {
+                dispatch(loginSuccess(res));
+            } else {
+                dispatch(signupSuccess(res));
+            }           
+        } catch (err){
+            dispatch(loginFailure(err));
+            throw Error('Login fail');
+        }        
     };
 };
 

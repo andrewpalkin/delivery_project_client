@@ -9,7 +9,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    const login = loginPayload => {              
+    const login = loginPayload => {                      
         dispatch(authOperations.loginOperation(loginPayload));
     };
 

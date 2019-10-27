@@ -7,7 +7,7 @@ const onSubmitSignUp = () => {};
 const Signup = props => {
     const {user: {id}} = props;
     return id ? (
-        <Redirect to="/" />
+        <Redirect to="/login" />
     ) : (
         <SignupForm signup={props.signup} onSubmit={onSubmitSignUp} />
     );
