@@ -42,7 +42,7 @@ const loginOperation = signupPayload => {
             }           
         } catch (err){
             dispatch(loginFailure(err));
-            throw Error('Login fail');
+            new Error('Login fail');
         }        
     };
 };

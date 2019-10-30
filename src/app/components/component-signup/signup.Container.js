@@ -3,7 +3,9 @@ import SignUpMainComponent from "./signup.Component";
 import { authOperations } from "../../apis/auth-api";
 
 const mapStateToProps = state => {
-    return {                
+    const {auth: {error}} = state;
+    return {
+        exeption: error,                
         user: state.auth.user
     };
 };
