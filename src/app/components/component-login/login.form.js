@@ -6,7 +6,7 @@ import {Field, reduxForm} from "redux-form";
 import renderInput from "../../renders/renderInput";
 
 const LoginForm = props => {
-    const {handleSubmit, value} = props;
+    const {handleSubmit} = props;
     return (
         <div className="login-form">
             {/*

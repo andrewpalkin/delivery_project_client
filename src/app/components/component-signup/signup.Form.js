@@ -1,27 +1,14 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {Button, Form, Grid, Header, Message, Segment} from "semantic-ui-react";
-import classnames from 'classnames';
+import {requiredCommonValdation} from '../../utils/FormFieldValidator';
 
 import {Field, reduxForm} from "redux-form";
 
-import renderInput from "../../renders/renderInput";
-
-const validate = values => {
-    const errors = {};
-    const requiredFields = ['email', 'password'];
-    requiredFields.forEach(field => {
-        if(!validate[field]) {
-            errors[field] = 'Reqired'
-        };
-    })   
-    if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address'
-    } 
-    return errors
-  }
+import {default as renderInput} from "../../renders/renderInput";
 
 const SignupForm = props => {
-    const {handleSubmit, signup} = props;
+    const { handleSubmit, pristine, submitting } = props
     return (
         <div className="signup-form">
             {/*
@@ -51,14 +38,14 @@ const SignupForm = props => {
                         </Message>
                         )
                     } */}
-                    <Form size="large" onSubmit={handleSubmit(signup)}>
+                    <Form size="large" onSubmit={handleSubmit}>
                         <Segment stacked>
                             <Field
-                                component={renderInput}
+                                component={renderInput}                              
                                 name="email"
                                 icon="mail"
                                 iconPosition="left"
-                                placeholder="E-mail address"
+                                placeholder="E-mail address"                               
                             />
                             <Field
                                 component={renderInput}
@@ -66,11 +53,9 @@ const SignupForm = props => {
                                 icon="lock"
                                 iconPosition="left"
                                 placeholder="Password"
-                                type="password"
-                            />                           
-                            <Button color="teal" fluid size="large">
-                                Sign up
-                            </Button>
+                                type="password"                                
+                            />                                                     
+                            <Button color="teal" fluid size="large" primary loading={submitting} disabled={pristine || submitting}>Sign up</Button>
                         </Segment>
                     </Form>
                     <Message>
@@ -82,7 +67,15 @@ const SignupForm = props => {
     );
 };
 
+SignupForm.propTypes = {
+    handleSubmit: PropTypes.func,
+    reset: PropTypes.func,
+    onSubmit: PropTypes.func,
+    pristine: PropTypes.bool,
+    submitting: PropTypes.bool
+  };
+
 export default reduxForm({
-    form: "signupForm",
-    validate                  
+    form: "signupForm",    
+    validate: requiredCommonValdation    
 })(SignupForm);
