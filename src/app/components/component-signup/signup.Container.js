@@ -1,22 +1,40 @@
 import { connect } from "react-redux";
 import SignUpMainComponent from "./signup.Component";
 import { authOperations } from "../../apis/auth-api";
+import { isInvalid } from 'redux-form';
+import { SubmissionError } from 'redux-form';
+
+// next step to switch on redux-api-middleware - to allow side affect api calls 
+const formApiAdapter = (dispatch, actionCreator) => {
+    return (...args) =>
+      new Promise((resolve, reject) => {
+        dispatch(actionCreator(...args)).then(response => {
+          if (response.error) {
+            reject(new SubmissionError(response))
+          } else {
+            resolve(response)
+          }
+        })
+      })
+}
 
 const mapStateToProps = state => {
     const {auth: {error}} = state;
     return {
-        exeption: error,                
-        user: state.auth.user
+        appExeptions: error,  
+        fromInvalid: isInvalid('signupForm')(state),              
+        user: state.auth.user,
     };
 };
 
 const mapDispatchToProps = dispatch => {
-    const signup = signupPayload => {              
-        dispatch(authOperations.signupOperation(signupPayload));
-    };
-
+    const onSubmit = (payload) => {  
+        if (!!payload) {
+            dispatch(authOperations.signupOperation(payload));
+        }       
+    };   
     return {
-        signup
+        signup: onSubmit
     };
 };
 

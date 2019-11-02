@@ -1,5 +1,6 @@
 import {Creators} from "./actions";
-import LoginService from '../../services/authServices'
+import LoginService from '../../services/authServices';
+import { SubmissionError } from 'redux-form';
 
 const signupRequest = Creators.signupRequest;
 const signupSuccess = Creators.signupSuccess;
@@ -18,12 +19,14 @@ const signupOperation = signupPayload => {
             const res = await LoginService.register(signupPayload);
             if (res.error) {
                 dispatch(signupFailure(res));
+                throw new SubmissionError({ email: 'User does not exist', _error: 'Login failed!' })
             } else {
-                dispatch(signupSuccess(res));
+                dispatch(signupSuccess(res));                
             }           
         } catch (err){
             dispatch(signupFailure(err));
-            throw Error('registry fail');
+            throw new Error('registry fail');
+            throw new SubmissionError({ email: 'User does not exist', _error: 'Login failed!' })            
         }        
     };
 };

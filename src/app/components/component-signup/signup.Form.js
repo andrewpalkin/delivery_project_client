@@ -8,7 +8,7 @@ import {Field, reduxForm} from "redux-form";
 import {default as renderInput} from "../../renders/renderInput";
 
 const SignupForm = props => {
-    const { handleSubmit, pristine, submitting } = props
+    const { handleSubmit, pristine, submitting, signup} = props
     return (
         <div className="signup-form">
             {/*
@@ -38,7 +38,7 @@ const SignupForm = props => {
                         </Message>
                         )
                     } */}
-                    <Form size="large" onSubmit={handleSubmit}>
+                    <Form size="large" onSubmit={handleSubmit(signup)}>
                         <Segment stacked>
                             <Field
                                 component={renderInput}                              
