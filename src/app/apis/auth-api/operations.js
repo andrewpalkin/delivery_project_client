@@ -24,8 +24,7 @@ const signupOperation = signupPayload => {
                 dispatch(signupSuccess(res));                
             }           
         } catch (err){
-            dispatch(signupFailure(err));
-            throw new Error('registry fail');
+            dispatch(signupFailure(err));            
             throw new SubmissionError({ email: 'User does not exist', _error: 'Login failed!' })            
         }        
     };

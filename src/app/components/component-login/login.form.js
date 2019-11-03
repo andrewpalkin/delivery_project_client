@@ -6,7 +6,7 @@ import {Field, reduxForm} from "redux-form";
 import renderInput from "../../renders/renderInput";
 
 const LoginForm = props => {
-    const {handleSubmit} = props;
+    const { handleSubmit, pristine, submitting, login} = props;
     return (
         <div className="login-form">
             {/*
@@ -30,7 +30,7 @@ const LoginForm = props => {
                     <Header as="h2" color="teal" textAlign="center">
                         Login up
                     </Header>
-                    <Form size="large" onSubmit={handleSubmit}>
+                    <Form size="large" onSubmit={handleSubmit(login)}>
                         <Segment stacked>
                             <Field
                                 component={renderInput}
