@@ -1,7 +1,12 @@
 import {createReducer} from 'reduxsauce';
 import Types from "./types";
 
-const INITIAL_STATE =  { error: false, singUp: false, loggedIn: false, user: {id: null,  verification: false} };
+// next stime need to reworked it to more elegant way , with  middlelayer options 
+const user = JSON.stringify(localStorage.getItem('user'));
+
+const INITIAL_STATE = user
+     ? { error: false, singUp: true, loggedIn: true, user: user }
+     : { error: false, singUp: false, loggedIn: false, user: {id: null,  verification: false} };
 
 export const signupRequest = (state = INITIAL_STATE, action) => {
     return {

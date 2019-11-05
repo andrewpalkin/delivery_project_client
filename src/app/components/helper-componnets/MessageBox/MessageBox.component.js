@@ -1,36 +1,54 @@
-import React, { useState, useEffect } from "react";
-import { Message, Grid,  Transition } from 'semantic-ui-react'
+import React, {Component} from "react";
+import { Header, Modal, Message } from 'semantic-ui-react'
 
-const MessageBox = props => {
-    const {error} = props;
-    const [ hide ] = useState(1500);
-    const [ show] = useState(1600);
-    const [ visible, setVisible ] = useState(false);
-    let messsage = '';
-    if (error && error.errorMessage) {
-        setVisible(true);
-        messsage = error.errorMessage
+export default class MessageBox extends Component {
+    constructor(props) {
+        super(props);
+        this.state ={visible: true}
     }
-    // if (visible) {
-    //     setTimeout(setVisible(false), 15000);
-    // }    
-        useEffect(() => {
-                setInterval(() => {
-                    setVisible(!visible); // ✅ This doesn't depend on `count` variable outside
-                }, 15000);    
-        }, []);
-    return (
-        <Grid columns={2}>
-            <Grid.Column>
-                <Transition duration={{ hide, show }} visible={visible}>
-                    <Message negative>
-                        <Message.Header>We're sorry we can't apply that discount</Message.Header>
-                        <p>{messsage}</p>
-                    </Message>
-                </Transition>
-            </Grid.Column>
-         </Grid>
-         )
-};
+        
+    handleDismiss = (e) => {        
+        this.setState({visible: !this.state.visible})
+    }
 
-export default MessageBox;
+    getExceptionMessage = (props) => {
+        const {message} = props;        
+        // !!message ? this.setState({onDismiss: !this.state.onDismiss}) : null;
+        return  !!message ? true : false;         
+    }
+
+    getMessageBox = (message) => {
+        if (this.state.visible) {
+            return (
+              <Message
+                onDismiss={this.handleDismiss}
+                header='Error while loading!'
+                content={message}
+              />
+            )
+         }
+         return null;
+    }
+
+    getModalContent =(message) => {        
+        const {visible} = this.state;              
+        return (
+        <Modal open={visible} closeIcon onClose={this.handleDismiss} >        
+            <Header icon='archive' content='Error Message' />
+            <Modal.Content>
+              <p>
+                {message}
+              </p>
+            </Modal.Content>            
+          </Modal>)
+    }
+           
+    render() {
+        const {mode = 'message', message = '', error} = this.props;        
+
+        if (mode === 'modal' && error) {
+            return this.getModalContent(message);
+        }         
+        return error && this.getMessageBox(message);
+    }         
+};

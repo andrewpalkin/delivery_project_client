@@ -3,7 +3,8 @@ import MessageBoxComponent from "./MessageBox.component";
 
 const mapStateToProps = state => {    
     return {                
-        error: state.error,        
+        error: true,
+        message: 'Error',        
     };
 };
 
