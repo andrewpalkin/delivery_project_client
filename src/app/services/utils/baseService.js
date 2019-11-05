@@ -35,6 +35,12 @@ const request = () => {
                 errorName: response.data.name,
             }
         }
+        if (error && error.isAxiosError && error.message) {
+            errorData = {
+                error: true,
+                message: error.message 
+            }
+        }
         return errorData;
     };
 
