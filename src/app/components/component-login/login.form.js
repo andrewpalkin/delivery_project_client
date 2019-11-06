@@ -1,8 +1,7 @@
 import React from "react";
 import {Button, Form, Grid, Header, Segment} from "semantic-ui-react";
-
 import {Field, reduxForm} from "redux-form";
-
+import {requiredCommonValdation} from '../../utils/FormFieldValidator';
 import renderInput from "../../renders/renderInput";
 
 const LoginForm = props => {
@@ -37,5 +36,6 @@ const LoginForm = props => {
 };
 
 export default reduxForm({
-    form: "loginForm"
+    form: "loginForm",
+    validate: requiredCommonValdation    
 })(LoginForm);
