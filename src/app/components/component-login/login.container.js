@@ -1,20 +1,23 @@
 import { connect } from "react-redux";
 import LoginMainComponent from "./login.component";
-import { authOperations } from "../../apis/auth-api";
+import { authOperations} from "../../apis/auth-api";
 
-const mapStateToProps = state => {
+const mapStateToProps = state => {    
     return {                
-        loggedIn: state.auth.loggedIn
+        error: state.auth.error,
+        user: state.user,
     };
 };
 
 const mapDispatchToProps = dispatch => {
-    const login = loginPayload => {              
+   
+    const login = loginPayload => {                      
         dispatch(authOperations.loginOperation(loginPayload));
     };
 
+
     return {
-        login
+        login        
     };
 };
 

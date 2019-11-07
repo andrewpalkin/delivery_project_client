@@ -1,43 +1,28 @@
 import React from "react";
+import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 import {Button, Form, Grid, Header, Message, Segment} from "semantic-ui-react";
+import {requiredCommonValdation} from '../../utils/FormFieldValidator';
 
 import {Field, reduxForm} from "redux-form";
 
-import renderInput from "../../renders/renderInput";
+import {default as renderInput} from "../../renders/renderInput";
 
 const SignupForm = props => {
-    const {handleSubmit, signup} = props;
+    const { handleSubmit, pristine, submitting, signup} = props
     return (
-        <div className="signup-form">
-            {/*
-              Heads up! The styles below are necessary for the correct render of this example.
-              You can do same with CSS, the main idea is that all the elements up to the `Grid`
-              below must have a height of 100%.
-            */}
-            <style>{`
-                  body > div,
-                  body > div > div,
-                  body > div > div > div.signup-form {
-                    height: 100%;
-                }
-               `}</style>
-            <Grid
-                textAlign="center"
-                style={{height: "100%"}}
-                verticalAlign="middle"
-            >
                 <Grid.Column style={{maxWidth: 450}}>
                     <Header as="h2" color="teal" textAlign="center">
                         Sign up
-                    </Header>
+                    </Header>                 
                     <Form size="large" onSubmit={handleSubmit(signup)}>
                         <Segment stacked>
                             <Field
-                                component={renderInput}
+                                component={renderInput}                              
                                 name="email"
                                 icon="mail"
                                 iconPosition="left"
-                                placeholder="E-mail address"
+                                placeholder="E-mail address"                               
                             />
                             <Field
                                 component={renderInput}
@@ -45,38 +30,27 @@ const SignupForm = props => {
                                 icon="lock"
                                 iconPosition="left"
                                 placeholder="Password"
-                                type="password"
-                            />
-                            <Field
-                                component={renderInput}
-                                name="firstName"
-                                icon="user"
-                                iconPosition="left"
-                                placeholder="First Name"
-                                fluid
-                            />
-                            <Field
-                                component={renderInput}
-                                name="lastName"
-                                icon="user"
-                                iconPosition="left"
-                                placeholder="Last Name"
-                                fluid
-                            />
-                            <Button color="teal" fluid size="large">
-                                Sign up
-                            </Button>
+                                type="password"                                
+                            />                                                     
+                            <Button color="teal" fluid size="large" primary loading={submitting} disabled={pristine || submitting}>Sign up</Button>
                         </Segment>
                     </Form>
                     <Message>
-                        Already have an account? <a href="http://google.com">Log in</a>
+                        Already have an account? <Link to="/login">Log in</Link>
                     </Message>
-                </Grid.Column>
-            </Grid>
-        </div>
+                </Grid.Column>      
     );
 };
 
+SignupForm.propTypes = {
+    handleSubmit: PropTypes.func,
+    reset: PropTypes.func,
+    onSubmit: PropTypes.func,
+    pristine: PropTypes.bool,
+    submitting: PropTypes.bool
+  };
+
 export default reduxForm({
-    form: "signupForm"
+    form: "signupForm",    
+    validate: requiredCommonValdation    
 })(SignupForm);
