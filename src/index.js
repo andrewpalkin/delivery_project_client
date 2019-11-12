@@ -8,12 +8,19 @@ import rootReducer from "./reducers";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 
+/* Firebase management store redux sdk */
+import { reactReduxFirebase } from "react-redux-firebase";
+import firebase from "./services/firebase";
+
 /* eslint-disable no-underscore-dangle */
 const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
 const devtoolMiddleware = ext && ext();
 /* eslint-enable */
 
-const store = createStore(
+// Closure around createdStore to allow firebase intialize it self before rudux store is will be up 
+const createStoreWithFirebase = compose(reactReduxFirebase(firebase))(createStore);
+
+const store = createStoreWithFirebase(
   rootReducer,
   compose(
     applyMiddleware(
