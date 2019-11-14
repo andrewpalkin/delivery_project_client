@@ -7,6 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./reducers";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
+import NavigationBar from "./app/components/helper-componnets/NavigationBar/NavigationBar.component";
 
 /* eslint-disable no-underscore-dangle */
 const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
@@ -20,7 +21,6 @@ const store = createStore(
       thunk,
       logger
     ),
-    devtoolMiddleware
   )
 );
 
