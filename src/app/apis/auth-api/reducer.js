@@ -1,7 +1,12 @@
 import {createReducer} from 'reduxsauce';
 import Types from "./types";
 
-const INITIAL_STATE =  { error: false, singUp: false, loggedIn: false, user: {id: null,  verification: false} };
+// next stime need to reworked it to more elegant way , with  middlelayer options 
+const user = JSON.stringify(localStorage.getItem('user'));
+
+const INITIAL_STATE = user
+     ? { error: false, singUp: true, loggedIn: true, user: user }
+     : { error: false, singUp: false, loggedIn: false, user: {id: null,  verification: false} };
 
 export const signupRequest = (state = INITIAL_STATE, action) => {
     return {
@@ -58,19 +63,13 @@ export const loginSuccess = (state = INITIAL_STATE, action) => {
     };
 };
 
-export const loginFailure = (state = INITIAL_STATE, action) => {
-    const {loginSuccess: {data}} = action;
+export const loginFailure = (state = INITIAL_STATE, action) => {  
     return {
         ...state,
         showSpinner: true,
         loggedIn: false,  
-        error: action.signupError,
-        user: {
-            singUp: true,
-            loggedIn: false,
-            id: null,
-            verification: data.verification
-        }
+        error: action.loginFailure,
+        
     };
 };
 
@@ -78,6 +77,9 @@ export const HANDLERS = {
     [Types.SIGNUP_REQUEST]: signupRequest,
     [Types.SIGNUP_SUCCESS]: signupSuccess,
     [Types.SIGNUP_FAILURE]: signupFailure,
+    [Types.LOGIN_REQUEST]: loginRequest,
+    [Types.LOGIN_SUCCESS]: loginSuccess,
+    [Types.LOGIN_FAILURE]: loginFailure,
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS)
