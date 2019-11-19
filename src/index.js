@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import App from "./app/App";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
+import {Provider} from "react-redux";
+import {applyMiddleware, compose, createStore} from "redux";
 import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./reducers";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-import NavigationBar from "./app/components/helper-componnets/NavigationBar/NavigationBar.component";
 
 /* eslint-disable no-underscore-dangle */
 const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
@@ -15,21 +14,22 @@ const devtoolMiddleware = ext && ext();
 /* eslint-enable */
 
 const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(
-      thunk,
-      logger
-    ),
-  )
+    rootReducer,
+    compose(
+        applyMiddleware(
+            thunk,
+            logger
+        ),
+        devtoolMiddleware
+    )
 );
 
 const Main = () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
+    <Provider store={store}>
+        <App/>
+    </Provider>
 );
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+ReactDOM.render(<Main/>, document.getElementById('root'));
 
 serviceWorker.unregister();

@@ -10,8 +10,7 @@ const mapStateToProps = state => {
 
 
 const NavigationBarContainer = connect(
-    mapStateToProps,
-    null
+    mapStateToProps
 )(NavigationBarComponent);
 
 export default NavigationBarContainer;
