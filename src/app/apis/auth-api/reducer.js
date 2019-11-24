@@ -16,17 +16,13 @@ export const signupRequest = (state = INITIAL_STATE, action) => {
 };
 
 export const signupSuccess = (state = INITIAL_STATE, action) => {
-    const {signupResponse: {data, error}} = action;
+    const {signupResponse: {user, additionalUserInfo, operationType, credential}} = action;
     return {
         ...state,
         showSpinner: true,
-        error,                        
-        user: {
-            singUp: true,
-            loggedIn: false,
-            verification: false,
-            id: data.id            
-        }
+        error: false,                        
+        user: user,
+        uid: user.uid
     };
 };
 

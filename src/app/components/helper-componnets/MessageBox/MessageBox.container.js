@@ -15,7 +15,6 @@ const mapStateToProps = state => {
     };
 };
 
-
 const MessageBoxContainer = connect(
     mapStateToProps,
     null

@@ -5,7 +5,7 @@ import authReducer from "./app/apis/auth-api";
 import userReducer from "./app/apis/user-api";
 
 const rootReducer = combineReducers({
-  firebaseReducer,
+  firebase: firebaseReducer,
   auth: authReducer,
   form: formReducer,  
   user: userReducer
