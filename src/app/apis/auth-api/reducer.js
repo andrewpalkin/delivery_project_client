@@ -16,17 +16,13 @@ export const signupRequest = (state = INITIAL_STATE, action) => {
 };
 
 export const signupSuccess = (state = INITIAL_STATE, action) => {
-    const {signupResponse: {data, error}} = action;
+    const {signupResponse: {user, additionalUserInfo, operationType, credential}} = action;
     return {
         ...state,
         showSpinner: true,
-        error,                        
-        user: {
-            singUp: true,
-            loggedIn: false,
-            verification: false,
-            id: data.id            
-        }
+        error: false,                        
+        user: user,
+        uid: user.uid
     };
 };
 
@@ -36,6 +32,40 @@ export const signupFailure = (state = INITIAL_STATE, action) => {
         showSpinner: true,
         loggedIn: false,  
         error: action.signupError
+    };
+};
+
+export const loginRequest = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        showSpinner: true,
+        loggedIn: false,  
+        error: false,        
+    };
+};
+
+export const loginSuccess = (state = INITIAL_STATE, action) => {
+    const {loginSuccess: {data}} = action;
+    return {
+        ...state,
+        showSpinner: true,
+        loggedIn: false,  
+        user: {
+            singUp: true,
+            loggedIn: true,
+            id: data.id,
+            verification: data.verification
+        }
+    };
+};
+
+export const loginFailure = (state = INITIAL_STATE, action) => {  
+    return {
+        ...state,
+        showSpinner: true,
+        loggedIn: false,  
+        error: action.loginFailure,
+        
     };
 };
 

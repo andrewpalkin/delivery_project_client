@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => {
         dispatch(authOperations.loginOperation(loginPayload));
     };
     return {
-        login
+        login        
     };
 };
 

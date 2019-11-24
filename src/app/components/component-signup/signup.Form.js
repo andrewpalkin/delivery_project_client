@@ -9,36 +9,36 @@ import {Field, reduxForm} from "redux-form";
 import {default as renderInput} from "../../renders/renderInput";
 
 const SignupForm = props => {
-    const {handleSubmit, submitting, signup} = props
+    const { handleSubmit, pristine, submitting, signup} = props
     return (
-        <Grid.Column style={{maxWidth: 450}}>
-            <Header as="h2" color="teal" textAlign="center">
-                Sign up
-            </Header>
-            <Form size="large" onSubmit={handleSubmit(signup)}>
-                <Segment stacked>
-                    <Field
-                        component={renderInput}
-                        name="email"
-                        icon="mail"
-                        iconPosition="left"
-                        placeholder="E-mail address"
-                    />
-                    <Field
-                        component={renderInput}
-                        name="password"
-                        icon="lock"
-                        iconPosition="left"
-                        placeholder="Password"
-                        type="password"
-                    />
-                    <Button color="teal" fluid size="large" primary loading={submitting}>Sign up</Button>
-                </Segment>
-            </Form>
-            <Message>
-                Already have an account? <Link to="/login">Log in</Link>
-            </Message>
-        </Grid.Column>
+                <Grid.Column style={{maxWidth: 450}}>
+                    <Header as="h2" color="teal" textAlign="center">
+                        Sign up
+                    </Header>                 
+                    <Form size="large" onSubmit={handleSubmit(signup)}>
+                        <Segment stacked>
+                            <Field
+                                component={renderInput}                              
+                                name="email"
+                                icon="mail"
+                                iconPosition="left"
+                                placeholder="E-mail address"                               
+                            />
+                            <Field
+                                component={renderInput}
+                                name="password"
+                                icon="lock"
+                                iconPosition="left"
+                                placeholder="Password"
+                                type="password"                                
+                            />                                                     
+                            <Button color="teal" fluid size="large" primary loading={submitting} disabled={pristine || submitting}>Sign up</Button>
+                        </Segment>
+                    </Form>
+                    <Message>
+                        Already have an account? <Link to="/login">Log in</Link>
+                    </Message>
+                </Grid.Column>      
     );
 };
 
