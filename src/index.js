@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import App from "./app/App";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
-// nimport * as serviceWorker from "./serviceWorker";
 import rootReducer from "./reducers";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
@@ -22,14 +21,14 @@ const devtoolMiddleware = ext && ext();
 // const createStoreWithFirebase = compose(reactReduxFirebase(firebase))(createStore);
 
 const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(
-      thunk,
-      logger
-    ),
-    devtoolMiddleware
-  )
+    rootReducer,
+    compose(
+        applyMiddleware(
+            thunk,
+            logger
+        ),
+        devtoolMiddleware
+    )
 );
 
 const Main = () => (
@@ -41,6 +40,6 @@ const Main = () => (
   </Provider>
 );
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+ReactDOM.render(<Main/>, document.getElementById('root'));
 
 // serviceWorker.unregister();

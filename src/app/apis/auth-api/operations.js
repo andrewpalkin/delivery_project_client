@@ -2,6 +2,7 @@ import {Creators} from "./actions";
 import LoginService from '../../services/authServices';
 import firebase from "../../services/utils/Firebase/firebase";
 
+
 const signupRequest = Creators.signupRequest;
 const signupSuccess = Creators.signupSuccess;
 const signupFailure = Creators.signupFailure;
@@ -16,8 +17,6 @@ const signupOperation = payload => {
         // flag in the store, so that the UI can show a loading icon.
         dispatch(signupRequest());    
         try {
-            // const res = await LoginService.register(signupPayload);
-            // this should return a Promise
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(payload.email, payload.password)
@@ -25,27 +24,12 @@ const signupOperation = payload => {
                   // dispatch(signupSuccess("Your account was successfully created! Now you need to verify your e-mail address, please go check your inbox."))                          
                   dispatch(signupSuccess(res))                          
                 })
-                // .then(dataBeforeEmail => {
-                //     firebase.auth().onAuthStateChanged(function(user) {
-                //       user.sendEmailVerification();
-                //     });
-                //   })
-                //   .then(dataAfterEmail => {
-                //     firebase.auth().onAuthStateChanged(function(user) {
-                //       if (user.emailVerified) {
-                //         // Email is verified
-                //         dispatch(signupSuccess("Your account was successfully created! Now you need to verify your e-mail address, please go check your inbox."))                        
-                //       } else {
-                //         // Email is not verified
-                //         dispatch(signupFailure("Something went wrong, we couldn't create your account. Please try again."))                        
-                //       }
-                //     });
-                //   })
                 .catch(err => {
                   dispatch(signupFailure(err));
                 });                                    
         } catch (err){
             dispatch(signupFailure(err));                        
+
         }        
     };
 };

@@ -38,7 +38,7 @@ const request = () => {
         if (error && error.isAxiosError && error.message) {
             errorData = {
                 error: true,
-                message: error.message 
+                message: error.message
             }
         }
         if (response && response.data && error && error.message) {

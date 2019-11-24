@@ -69,6 +69,40 @@ export const loginFailure = (state = INITIAL_STATE, action) => {
     };
 };
 
+export const loginRequest = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        showSpinner: true,
+        loggedIn: false,  
+        error: false,        
+    };
+};
+
+export const loginSuccess = (state = INITIAL_STATE, action) => {
+    const {loginSuccess: {data}} = action;
+    return {
+        ...state,
+        showSpinner: true,
+        loggedIn: false,  
+        user: {
+            singUp: true,
+            loggedIn: true,
+            id: data.id,
+            verification: data.verification
+        }
+    };
+};
+
+export const loginFailure = (state = INITIAL_STATE, action) => {  
+    return {
+        ...state,
+        showSpinner: true,
+        loggedIn: false,  
+        error: action.loginFailure,
+        
+    };
+};
+
 export const HANDLERS = {
     [Types.SIGNUP_REQUEST]: signupRequest,
     [Types.SIGNUP_SUCCESS]: signupSuccess,

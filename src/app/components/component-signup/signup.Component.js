@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Redirect } from "react-router-dom";
 import { Grid } from "semantic-ui-react";
 import {withFirebase} from '../../services/utils/Firebase'
@@ -14,6 +15,7 @@ const Signup = props => {
     ) : (
         <div className="signup-form">
             <MessageBox />
+
             {/*
               Heads up! The styles below are necessary for the correct render of this example.
               You can do same with CSS, the main idea is that all the elements up to the `Grid`
@@ -30,10 +32,10 @@ const Signup = props => {
                 textAlign="center"
                 style={{height: "100%"}}
                 verticalAlign="middle"
-            >                
-                <SignupForm signup={props.signup} onSubmit={onSubmitSignup}  />
+            >
+                <SignupForm signup={props.signup} onSubmit={onSubmitSignup}/>
             </Grid>
-            </div>
+        </div>
     );
 };
 const SignupWidget = withFirebase(Signup);

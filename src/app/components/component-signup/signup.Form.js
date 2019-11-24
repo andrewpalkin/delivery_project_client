@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Button, Form, Grid, Header, Message, Segment} from "semantic-ui-react";
 import {requiredCommonValdation} from '../../utils/FormFieldValidator';
 
@@ -48,9 +48,9 @@ SignupForm.propTypes = {
     onSubmit: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool
-  };
+};
 
 export default reduxForm({
-    form: "signupForm",    
-    validate: requiredCommonValdation    
+    form: "signupForm",
+    validate: requiredCommonValdation
 })(SignupForm);
