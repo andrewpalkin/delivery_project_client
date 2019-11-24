@@ -15,22 +15,21 @@ const signupOperation = payload => {
     return async (dispatch) => {
         // Dispatching this action will toggle the 'showRedditSpinner'
         // flag in the store, so that the UI can show a loading icon.
-        dispatch(signupRequest());    
+        dispatch(signupRequest());
         try {
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(payload.email, payload.password)
                 .then(res => {
-                  // dispatch(signupSuccess("Your account was successfully created! Now you need to verify your e-mail address, please go check your inbox."))                          
-                  dispatch(signupSuccess(res))                          
+                    dispatch(signupSuccess(res))
                 })
                 .catch(err => {
-                  dispatch(signupFailure(err));
-                });                                    
-        } catch (err){
-            dispatch(signupFailure(err));                        
+                    dispatch(signupFailure(err));
+                });
+        } catch (err) {
+            dispatch(signupFailure(err));
 
-        }        
+        }
     };
 };
 
@@ -38,18 +37,18 @@ const loginOperation = signupPayload => {
     return async (dispatch) => {
         // Dispatching this action will toggle the 'showRedditSpinner'
         // flag in the store, so that the UI can show a loading icon.
-        dispatch(loginRequest());    
+        dispatch(loginRequest());
         try {
             const res = await LoginService.login(signupPayload);
             if (res.error) {
                 dispatch(loginFailure(res));
             } else {
                 dispatch(loginSuccess(res));
-            }           
-        } catch (err){
+            }
+        } catch (err) {
             dispatch(loginFailure(err));
-           // new Error('Login fail');
-        }        
+            // new Error('Login fail');
+        }
     };
 };
 

@@ -1,4 +1,4 @@
-import FirebaseContext, { withFirebase, hopComponent }  from './context';
+import FirebaseContext, {hopComponent, withFirebase} from './context';
 import firebase from './firebase';
 
 export default firebase;

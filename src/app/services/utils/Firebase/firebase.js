@@ -1,7 +1,6 @@
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
-
 // Add the Firebase services that you want to use
 // We only want to use Firebase Auth here
 import "firebase/auth";
@@ -11,18 +10,17 @@ import "firebase/auth";
 var prodConfig = {}
 
 var devConfig = {
-    apiKey: "AIzaSyBxyjiEaYfB1bcp0r90F0TYkUObJJGuGvU",
-    authDomain: "exalted-beanbag-649.firebaseapp.com",
-    databaseURL: "https://exalted-beanbag-649.firebaseio.com",
-    projectId: "exalted-beanbag-649",
-    storageBucket: "exalted-beanbag-649.appspot.com",
-    messagingSenderId: "632071944847",
-    appId: "1:632071944847:web:9fba0193b57db7616b8efa"
-  };
+    apiKey: "AIzaSyD5dQg2iNEYdvKOqTK02uWq0qzqNbNOR9U",
+    authDomain: "wish-mish-project-17062.firebaseapp.com",
+    databaseURL: "https://wish-mish-project-17062.firebaseio.com",
+    projectId: "wish-mish-project-17062",
+    storageBucket: "wish-mish-project-17062.appspot.com",
+    messagingSenderId: "1062794084702"
+};
 
-  const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
-  // Initialize Firebase
-  firebase.initializeApp(config);
+const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+// Initialize Firebase
+firebase.initializeApp(config);
 
 
 // Finally, export it to use it throughout your app
