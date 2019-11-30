@@ -19,18 +19,20 @@ export const signupSuccess = (state = INITIAL_STATE, action) => {
     const {signupResponse: {user, additionalUserInfo, operationType, credential}} = action;
     return {
         ...state,
-        showSpinner: true,
+        showSpinner: false,
         error: false,                        
-        user: user,
-        uid: user.uid
+        user: {
+            email: user.email,
+            emailVerified: user.emailVerified,
+            uid: user.uid
+        }        
     };
 };
 
 export const signupFailure = (state = INITIAL_STATE, action) => {
     return {
         ...state,
-        showSpinner: true,
-        loggedIn: false,  
+        showSpinner: false,
         error: action.signupError
     };
 };
@@ -38,23 +40,22 @@ export const signupFailure = (state = INITIAL_STATE, action) => {
 export const loginRequest = (state = INITIAL_STATE, action) => {
     return {
         ...state,
-        showSpinner: true,
-        loggedIn: false,  
+        showSpinner: true,      
         error: false,        
     };
 };
 
 export const loginSuccess = (state = INITIAL_STATE, action) => {
-    const {loginSuccess: {data}} = action;
+    const {loginSuccess: {user}} = action;
     return {
         ...state,
-        showSpinner: true,
-        loggedIn: false,  
+        showSpinner: false,      
         user: {
-            singUp: true,
-            loggedIn: true,
-            id: data.id,
-            verification: data.verification
+            isLoged: true,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            uid: user.uid,
+            token: user.refreshToken
         }
     };
 };
@@ -63,45 +64,11 @@ export const loginFailure = (state = INITIAL_STATE, action) => {
     return {
         ...state,
         showSpinner: true,
-        loggedIn: false,  
         error: action.loginFailure,
         
     };
 };
 
-export const loginRequest = (state = INITIAL_STATE, action) => {
-    return {
-        ...state,
-        showSpinner: true,
-        loggedIn: false,  
-        error: false,        
-    };
-};
-
-export const loginSuccess = (state = INITIAL_STATE, action) => {
-    const {loginSuccess: {data}} = action;
-    return {
-        ...state,
-        showSpinner: true,
-        loggedIn: false,  
-        user: {
-            singUp: true,
-            loggedIn: true,
-            id: data.id,
-            verification: data.verification
-        }
-    };
-};
-
-export const loginFailure = (state = INITIAL_STATE, action) => {  
-    return {
-        ...state,
-        showSpinner: true,
-        loggedIn: false,  
-        error: action.loginFailure,
-        
-    };
-};
 
 export const HANDLERS = {
     [Types.SIGNUP_REQUEST]: signupRequest,

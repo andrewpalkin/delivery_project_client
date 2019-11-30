@@ -1,20 +1,22 @@
 import {connect} from "react-redux";
 import LoginMainComponent from "./login.component";
 import {authOperations} from "../../apis/auth-api";
+import {default as SS} from '../../services/utils/sessionStorage';
 
 const mapStateToProps = state => {
+    
     return {
+        user: state.auth.user || SS.getItem('user'),
         error: state.auth.error,
-        user: state.user,
     };
 };
 
 const mapDispatchToProps = dispatch => {
-    const login = loginPayload => {
+    const loginHandler = loginPayload => {
         dispatch(authOperations.loginOperation(loginPayload));
     };
     return {
-        login        
+        login: loginHandler   
     };
 };
 

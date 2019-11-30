@@ -3,7 +3,6 @@ import {Button, Form, Grid, Header, Segment} from "semantic-ui-react";
 import {Field, reduxForm} from "redux-form";
 import {requiredCommonValdation} from '../../utils/FormFieldValidator';
 import renderInput from "../../renders/renderInput";
-import {Link} from "react-router-dom";
 
 const LoginForm = props => {
     const { handleSubmit, pristine, submitting, login} = props;

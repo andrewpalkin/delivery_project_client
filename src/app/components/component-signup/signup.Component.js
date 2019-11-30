@@ -9,8 +9,8 @@ import {MessageBox} from '../helper-componnets';
 const onSubmitSignup = () => {};
 
 const Signup = props => {
-    const {user: {id}} = props;
-    return id ? (
+    const {user} = props;
+    return user.uid ? (
         <Redirect to="/login" />
     ) : (
         <div className="signup-form">

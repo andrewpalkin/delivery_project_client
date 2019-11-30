@@ -1,10 +1,11 @@
 import {connect} from "react-redux";
 import SignUpMainComponent from "./signup.Component";
 import {authOperations} from "../../apis/auth-api";
+import {default as ss} from '../../services/utils/sessionStorage'
 
 const mapStateToProps = state => {
     return {
-        user: state.auth.user,
+        user: state.auth.user || ss.getItem('user'),
     };
 };
 
