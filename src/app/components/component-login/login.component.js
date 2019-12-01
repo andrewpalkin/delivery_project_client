@@ -10,7 +10,7 @@ const onSubmitLogin = () => {
 const Login = props => {
     const {user: {isLoged}} = props;
     return (isLoged) ? (
-        <Redirect to="/home"/>
+        <Redirect to="/"/>
     ) : (
         <div className="signup-form">
             <MessageBox error={'true'} message={'Need to verify email'}/>

@@ -1,6 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {Button, Dropdown, Header, Menu, Visibility} from "semantic-ui-react";
+import {Dropdown, Header, Menu, Visibility} from "semantic-ui-react";
+
+import NavBarLoginSignUpButtons from "./NavBarLoginSignUpButtons";
 
 const NavBarMenuComponent = props => {
     return (
@@ -26,14 +28,8 @@ const NavBarMenuComponent = props => {
                                 <Dropdown.Item>Spanish</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-
                         <Menu.Item>
-                            {
-                                props.user.loggedIn ?
-                                    <Button primary>User Name</Button>
-                                    :
-                                    <Button primary>Sign Up</Button>
-                            }
+                            <NavBarLoginSignUpButtons/>
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu>
