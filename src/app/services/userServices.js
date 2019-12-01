@@ -1,11 +1,11 @@
 import Request from './utils/baseService';
 
-const userVerify = async (payload) => {   
-    return await Request().post('/auth/verify', payload);  
+const userVerify = async (payload) => {
+    return await Request().post('/auth/verify', payload);
 };
 
 const authServices = {
-    verify: userVerify    
+    verify: userVerify
 };
 
 export default authServices;

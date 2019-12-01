@@ -9,22 +9,18 @@ export const hopComponent = WrappedComponent => {
             super(props);
             this.data = {data: "1"}
         }
-
         render() {
             return <WrappedComponent data={this.data} {...this.props}/>
         }
     }
 };
 
-
 export const withFirebase = Component => props => {
     return (
         <FirebaseContext.Consumer>
-
             {firebase => <Component {...props} firebase={firebase}/>}
         </FirebaseContext.Consumer>
     )
 };
-
 
 export default FirebaseContext;

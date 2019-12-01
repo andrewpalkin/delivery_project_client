@@ -1,11 +1,9 @@
-import { createActions } from "reduxsauce";
+import {createActions} from "reduxsauce";
 
-const { Creators, Types } = createActions({
+const {Creators, Types} = createActions({
     verifyRequest: ["verifyRequest"],
     verifySuccess: ["verifySuccess"],
-    verifyFailure: ["verifyFailure"],
-    
-
+    verifyFailure: ["verifyFailure"]
 });
 
-export { Creators, Types };
+export {Creators, Types};

@@ -1,15 +1,16 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
-import { Grid } from "semantic-ui-react";
+import {Redirect} from "react-router-dom";
+import {Grid} from "semantic-ui-react";
 import LoginForm from "./login.form";
 import {MessageBox} from '../helper-componnets';
 
-const onSubmitLogin = () => {};
+const onSubmitLogin = () => {
+};
 
-const Login = props => {  
-    const {user: {isLoged}} = props; 
+const Login = props => {
+    const {user: {isLoged}} = props;
     return (isLoged) ? (
-        <Redirect to="/home" />
+        <Redirect to="/home"/>
     ) : (
         <div className="signup-form">
             <MessageBox error={'true'} message={'Need to verify email'}/>
@@ -29,10 +30,10 @@ const Login = props => {
                 textAlign="center"
                 style={{height: "100%"}}
                 verticalAlign="middle"
-            >                
-                <LoginForm login={props.login} onSubmit={onSubmitLogin} />
+            >
+                <LoginForm login={props.login} onSubmit={onSubmitLogin}/>
             </Grid>
-            </div>        
+        </div>
     );
 };
 

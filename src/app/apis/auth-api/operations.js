@@ -21,13 +21,13 @@ const signupOperation = payload => {
                 .auth()
                 .createUserWithEmailAndPassword(payload.email, payload.password)
                 .then(res => {
-                  dispatch(signupSuccess(res));
-                  sessionStorage.setItem("user", res.user);                          
+                    dispatch(signupSuccess(res));
+                    sessionStorage.setItem("user", res.user);
                 })
                 .catch(err => {
-                  dispatch(signupFailure(err));
-                });                                    
-        } catch (err){
+                    dispatch(signupFailure(err));
+                });
+        } catch (err) {
             dispatch(signupFailure(err));
         }
     };
@@ -40,18 +40,18 @@ const loginOperation = payload => {
         dispatch(loginRequest());
         try {
             firebase
-            .auth()
-            .signInWithEmailAndPassword(payload.email, payload.password)
-            .then(res => {
-                dispatch(loginSuccess(res)); 
-                sessionStorage.setItem("user", res.user);      
-            })
-            .catch(err => {
-                dispatch(loginFailure(err));    
-            })           
-        } catch (err){
-            dispatch(loginFailure(err));           
-        }       
+                .auth()
+                .signInWithEmailAndPassword(payload.email, payload.password)
+                .then(res => {
+                    dispatch(loginSuccess(res));
+                    sessionStorage.setItem("user", res.user);
+                })
+                .catch(err => {
+                    dispatch(loginFailure(err));
+                })
+        } catch (err) {
+            dispatch(loginFailure(err));
+        }
 
     };
 };

@@ -6,7 +6,6 @@ import SignUpPage from "./pages/page-signup/signup.Page";
 import SigninPage from "./pages/page-signin/signin.Page";
 import NavigationBar from "./components/helper-componnets/NavigationBar/NavigationBar.container";
 
-
 class App extends Component {
     render() {
         return (

@@ -8,7 +8,6 @@ const mapStateToProps = state => {
     };
 };
 
-
 const NavigationBarContainer = connect(
     mapStateToProps
 )(NavigationBarComponent);

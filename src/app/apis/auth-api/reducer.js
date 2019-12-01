@@ -16,11 +16,11 @@ export const signupRequest = (state = INITIAL_STATE) => {
 };
 
 export const signupSuccess = (state = INITIAL_STATE, action) => {
-    const {signupResponse: {user, additionalUserInfo, operationType, credential}} = action;
+    const {signupResponse: {user}} = action;
     return {
         ...state,
         showSpinner: false,
-        error: false,                        
+        error: false,
         user: {
             email: user.email,
             emailVerified: user.emailVerified,
@@ -40,8 +40,8 @@ export const signupFailure = (state = INITIAL_STATE, action) => {
 export const loginRequest = (state = INITIAL_STATE) => {
     return {
         ...state,
-        showSpinner: true,      
-        error: false,        
+        showSpinner: true,
+        error: false,
     };
 };
 
@@ -49,7 +49,7 @@ export const loginSuccess = (state = INITIAL_STATE, action) => {
     const {loginSuccess: {user}} = action;
     return {
         ...state,
-        showSpinner: false,      
+        showSpinner: false,
         user: {
             isLoged: true,
             email: user.email,
@@ -67,7 +67,6 @@ export const loginFailure = (state = INITIAL_STATE, action) => {
         error: action.loginFailure,
     };
 };
-
 
 export const HANDLERS = {
     [Types.SIGNUP_REQUEST]: signupRequest,

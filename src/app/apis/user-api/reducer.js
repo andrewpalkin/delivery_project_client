@@ -13,12 +13,12 @@ export const verifySuccess = (state, action) => {
     return {
         ...state,
         showSpinner: true,
-        error,                        
+        error,
         user: {
             singUp: true,
             loggedIn: false,
             verification: false,
-            id: data.id            
+            id: data.id
         }
     };
 };
@@ -27,11 +27,10 @@ export const verifyFailure = (state, action) => {
     return {
         ...state,
         showSpinner: true,
-        loggedIn: false,  
+        loggedIn: false,
         error: action.verifyFailure
     };
 };
-
 
 
 export const HANDLERS = {

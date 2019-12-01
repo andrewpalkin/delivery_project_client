@@ -1,13 +1,12 @@
-import { createActions } from "reduxsauce";
+import {createActions} from "reduxsauce";
 
-const { Creators, Types } = createActions({
+const {Creators, Types} = createActions({
     signupRequest: ["signupPayload"],
     signupSuccess: ["signupResponse"],
     signupFailure: ["signupError"],
     loginRequest: ["loginRequest"],
     loginSuccess: ["loginSuccess"],
     loginFailure: ["loginFailure"]
-
 });
 
-export { Creators, Types };
+export {Creators, Types};

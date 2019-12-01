@@ -5,5 +5,5 @@ const VERIFY_FAILURE = "VERIFY_FAILURE";
 export default {
     VERIFY_REQUEST,
     VERIFY_SUCCESS,
-    VERIFY_FAILURE    
+    VERIFY_FAILURE
 };

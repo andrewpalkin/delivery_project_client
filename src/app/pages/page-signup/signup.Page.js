@@ -4,7 +4,7 @@ import SignUpMainContainer from "../../components/component-signup/signup.Contai
 class SignUpPage extends Component {
     render() {
         return (
-            <SignUpMainContainer />
+            <SignUpMainContainer/>
         );
     }
 }

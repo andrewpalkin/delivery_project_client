@@ -9,23 +9,20 @@ const verifyOperation = payloadData => {
     return async (dispatch) => {
         // Dispatching this action will toggle the 'showRedditSpinner'
         // flag in the store, so that the UI can show a loading icon.
-        dispatch(verifyRequest());    
+        dispatch(verifyRequest());
         try {
             const res = await LoginService.register(payloadData);
             if (res.error) {
                 dispatch(verifyFailure(res));
-                
             } else {
-                dispatch(verifySuccess(res));                
-            }           
-        } catch (err){
-            dispatch(verifyFailure(err));            
-        
-        }        
+                dispatch(verifySuccess(res));
+            }
+        } catch (err) {
+            dispatch(verifyFailure(err));
+        }
     };
 };
 
-
 export default {
-    verifyOperation  
+    verifyOperation
 };
