@@ -1,22 +1,20 @@
 import React from "react";
 
-import {Redirect} from "react-router-dom";
-import {Grid} from "semantic-ui-react";
+import { Redirect } from "react-router-dom";
+import { Grid } from "semantic-ui-react";
 import {withFirebase} from '../../services/utils/Firebase'
 import SignupForm from "./signup.Form";
 import {MessageBox} from '../helper-componnets';
 
-const onSubmitSignup = () => {
-};
+const onSubmitSignup = () => {};
 
 const Signup = props => {
-    const {user: {id}} = props;
-    return id ? (
-        <Redirect to="/login"/>
+    const {user} = props;
+    return user.uid ? (
+        <Redirect to="/login" />
     ) : (
         <div className="signup-form">
-            <MessageBox/>
-
+            <MessageBox />
             {/*
               Heads up! The styles below are necessary for the correct render of this example.
               You can do same with CSS, the main idea is that all the elements up to the `Grid`

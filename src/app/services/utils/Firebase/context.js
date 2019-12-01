@@ -16,13 +16,15 @@ export const hopComponent = WrappedComponent => {
     }
 };
 
+
 export const withFirebase = Component => props => {
     return (
         <FirebaseContext.Consumer>
+
             {firebase => <Component {...props} firebase={firebase}/>}
         </FirebaseContext.Consumer>
     )
-
 };
+
 
 export default FirebaseContext;
