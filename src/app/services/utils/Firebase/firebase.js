@@ -1,3 +1,4 @@
+
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 import * as firebase from "firebase/app";
@@ -10,15 +11,18 @@ import "firebase/auth";
 var prodConfig = {}
 
 var devConfig = {
-    apiKey: "AIzaSyD5dQg2iNEYdvKOqTK02uWq0qzqNbNOR9U",
-    authDomain: "wish-mish-project-17062.firebaseapp.com",
-    databaseURL: "https://wish-mish-project-17062.firebaseio.com",
-    projectId: "wish-mish-project-17062",
-    storageBucket: "wish-mish-project-17062.appspot.com",
-    messagingSenderId: "1062794084702"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DB_URL,
+    projectId: process.env.REACT_APP_PROJECT_IS,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_Id,
+    appId: process.env.REACT_APP_APP_ID
 };
+    
 
 const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+console.log(process.env);
 // Initialize Firebase
 firebase.initializeApp(config);
 

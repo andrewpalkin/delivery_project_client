@@ -1,5 +1,4 @@
 import {Creators} from "./actions";
-import LoginService from '../../services/authServices';
 import firebase from "../../services/utils/Firebase/firebase";
 import {default as sessionStorage} from "../../services/utils/sessionStorage";
 
@@ -10,6 +9,9 @@ const signupFailure = Creators.signupFailure;
 const loginRequest = Creators.loginRequest;
 const loginSuccess = Creators.loginSuccess;
 const loginFailure = Creators.loginFailure;
+
+// Logout 
+const signOutRequest = Creators.signOutRequest;
 
 const signupOperation = payload => {
     return async (dispatch) => {
@@ -56,15 +58,29 @@ const loginOperation = payload => {
     };
 };
 
-const logoutOperation = () => {
+const signOutOperation = () => {
     return (dispatch) => {
-        LoginService.logout();
-        dispatch(signupFailure())
+        dispatch(signOutRequest())
+        try {
+            firebase
+                .auth()
+                .signOut()
+                .then(res => {
+                    sessionStorage.removeItem('user');
+                    dispatch(signOutRequest({user: false}))
+                })
+                .catch(err => {
+                    dispatch(signOutRequest(err))
+                })    
+        } catch (err) {
+            dispatch(signOutRequest()) 
+        }     
+        
     }
 };
 
 export default {
     signupOperation,
     loginOperation,
-    logoutOperation
+    signOutOperation
 };

@@ -8,8 +8,8 @@ const onSubmitLogin = () => {
 };
 
 const Login = props => {
-    const {user: {isLoged}} = props;
-    return (isLoged) ? (
+    const {isSign} = props;
+    return (isSign) ? (
         <Redirect to="/"/>
     ) : (
         <div className="signup-form">

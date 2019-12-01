@@ -1,11 +1,10 @@
 import {connect} from "react-redux";
 import LoginMainComponent from "./login.component";
 import {authOperations} from "../../apis/auth-api";
-import {default as SS} from '../../services/utils/sessionStorage';
 
 const mapStateToProps = state => {
     return {
-        user: state.auth.user || SS.getItem('user'),
+        isSign: state.auth.isSign,
         error: state.auth.error,
     };
 };

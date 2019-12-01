@@ -11,7 +11,7 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div>
-                    <NavigationBar/>
+                    <NavigationBar />
                     <Container style={{marginTop: "100px", minHeight: "85vh"}}>
                         <Switch>
                             <Route exact path="/" component={HomePage}/>

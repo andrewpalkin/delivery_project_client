@@ -28,9 +28,11 @@ export default class NavigationBar extends Component {
             menuFixed,
             menuStyle
         } = this.state;
+        const {isSign} = this.props;
 
         return (
             <NavBarMenuComponent
+                isSign={isSign}
                 menuFixed={menuFixed}
                 handleItemClick={this.handleItemClick}
                 activeItem={activeItem}

@@ -2,7 +2,6 @@ import React from "react";
 
 import {Redirect} from "react-router-dom";
 import {Grid} from "semantic-ui-react";
-import {withFirebase} from '../../services/utils/Firebase'
 import SignupForm from "./signup.Form";
 import {MessageBox} from '../helper-componnets';
 
@@ -10,8 +9,8 @@ const onSubmitSignup = () => {
 };
 
 const Signup = props => {
-    const {user} = props;
-    return user.uid ? (
+    const {isSignUp} = props;
+    return isSignUp ? (
         <Redirect to="/login"/>
     ) : (
         <div className="signup-form">
@@ -38,6 +37,5 @@ const Signup = props => {
         </div>
     );
 };
-const SignupWidget = withFirebase(Signup);
 
-export default SignupWidget;
+export default Signup;

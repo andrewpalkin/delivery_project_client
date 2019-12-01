@@ -4,9 +4,9 @@ import Types from "./types";
 // next stime need to reworked it to more elegant way , with  middlelayer options 
 const user = JSON.stringify(localStorage.getItem('user'));
 
-const INITIAL_STATE = user
-    ? {error: false, singUp: true, loggedIn: true, user: user}
-    : {error: false, singUp: false, loggedIn: false, user: {id: null, verification: false}};
+const INITIAL_STATE = (user !== "null" && user !== undefined)
+    ? {error: false, singUp: true, isSign: true, user: user}
+    : {error: false, singUp: false, isSign: false, user: undefined};
 
 export const signupRequest = (state = INITIAL_STATE) => {
     return {
@@ -15,25 +15,23 @@ export const signupRequest = (state = INITIAL_STATE) => {
     };
 };
 
-export const signupSuccess = (state = INITIAL_STATE, action) => {
-    const {signupResponse: {user}} = action;
+export const signupSuccess = (state = INITIAL_STATE, action) => {    
     return {
         ...state,
         showSpinner: false,
         error: false,
-        user: {
-            email: user.email,
-            emailVerified: user.emailVerified,
-            uid: user.uid
-        }
+        isSignUp: true,
+        isSign: false
     };
 };
 
 export const signupFailure = (state = INITIAL_STATE, action) => {
+    const {signupError} = action;
     return {
         ...state,
         showSpinner: false,
-        error: action.signupError
+        error: signupError,
+        isSignUp: false
     };
 };
 
@@ -42,6 +40,8 @@ export const loginRequest = (state = INITIAL_STATE) => {
         ...state,
         showSpinner: true,
         error: false,
+        isSignUp: true,
+        isSign: false
     };
 };
 
@@ -50,8 +50,9 @@ export const loginSuccess = (state = INITIAL_STATE, action) => {
     return {
         ...state,
         showSpinner: false,
-        user: {
-            isLoged: true,
+        isSignUp: true,
+        isSign: true,
+        user: {            
             email: user.email,
             emailVerified: user.emailVerified,
             uid: user.uid,
@@ -61,10 +62,22 @@ export const loginSuccess = (state = INITIAL_STATE, action) => {
 };
 
 export const loginFailure = (state = INITIAL_STATE, action) => {
+    const {loginFailure} = action;
+    return {
+        ...state,
+        showSpinner: true,        
+        isSign: false,
+        error: loginFailure,
+    };
+};
+
+export const signOutOperation = (state = INITIAL_STATE, action) => {
     return {
         ...state,
         showSpinner: true,
-        error: action.loginFailure,
+        isSign: false,
+        isSignUp: false,
+        user: undefined
     };
 };
 
@@ -75,6 +88,7 @@ export const HANDLERS = {
     [Types.LOGIN_REQUEST]: loginRequest,
     [Types.LOGIN_SUCCESS]: loginSuccess,
     [Types.LOGIN_FAILURE]: loginFailure,
+    [Types.SIGNOUT_REQUEST]: signOutOperation
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS)

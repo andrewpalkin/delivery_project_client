@@ -4,7 +4,7 @@ import NavigationBarComponent from "./NavigationBar.component";
 const mapStateToProps = state => {
     return {
         error: state.auth.errors,
-        user: state.auth.user,
+        isSign: state.auth.isSign
     };
 };
 

@@ -6,7 +6,8 @@ const {Creators, Types} = createActions({
     signupFailure: ["signupError"],
     loginRequest: ["loginRequest"],
     loginSuccess: ["loginSuccess"],
-    loginFailure: ["loginFailure"]
+    loginFailure: ["loginFailure"],
+    signOutRequest: ['signOutRequest']
 });
 
 export {Creators, Types};
