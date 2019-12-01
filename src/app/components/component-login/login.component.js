@@ -6,12 +6,13 @@ import {MessageBox} from '../helper-componnets';
 
 const onSubmitLogin = () => {};
 
-const Login = props => {   
-    return props.loggedIn ? (
+const Login = props => {  
+    const {user: {isLoged}} = props; 
+    return (isLoged) ? (
         <Redirect to="/home" />
     ) : (
         <div className="signup-form">
-            <MessageBox />
+            <MessageBox error={'true'} message={'Need to verify email'}/>
             {/*
               Heads up! The styles below are necessary for the correct render of this example.
               You can do same with CSS, the main idea is that all the elements up to the `Grid`
