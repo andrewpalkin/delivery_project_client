@@ -5,10 +5,10 @@ import Types from "./types";
 const user = JSON.stringify(localStorage.getItem('user'));
 
 const INITIAL_STATE = user
-     ? { error: false, singUp: true, loggedIn: true, user: user }
-     : { error: false, singUp: false, loggedIn: false, user: {id: null,  verification: false} };
+    ? {error: false, singUp: true, loggedIn: true, user: user}
+    : {error: false, singUp: false, loggedIn: false, user: {id: null, verification: false}};
 
-export const signupRequest = (state = INITIAL_STATE, action) => {
+export const signupRequest = (state = INITIAL_STATE) => {
     return {
         ...state,
         showSpinner: true
@@ -25,7 +25,7 @@ export const signupSuccess = (state = INITIAL_STATE, action) => {
             email: user.email,
             emailVerified: user.emailVerified,
             uid: user.uid
-        }        
+        }
     };
 };
 
@@ -37,7 +37,7 @@ export const signupFailure = (state = INITIAL_STATE, action) => {
     };
 };
 
-export const loginRequest = (state = INITIAL_STATE, action) => {
+export const loginRequest = (state = INITIAL_STATE) => {
     return {
         ...state,
         showSpinner: true,      
@@ -60,12 +60,11 @@ export const loginSuccess = (state = INITIAL_STATE, action) => {
     };
 };
 
-export const loginFailure = (state = INITIAL_STATE, action) => {  
+export const loginFailure = (state = INITIAL_STATE, action) => {
     return {
         ...state,
         showSpinner: true,
         error: action.loginFailure,
-        
     };
 };
 

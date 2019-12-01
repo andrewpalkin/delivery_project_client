@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Button, Dropdown,  Menu } from 'semantic-ui-react'
+import React, {Component} from 'react';
+import {Button, Dropdown, Menu} from 'semantic-ui-react'
 
 export default class NavigationBar extends Component {
 
     render() {
-        const { error , user } = this.props;
+        const {user} = this.props;
 
         return (
             <Menu size='tiny'>
@@ -29,7 +29,7 @@ export default class NavigationBar extends Component {
                     <Menu.Item>
                         {
                             user.loggedIn ?
-                            <Button primary>User Name</Button>
+                                <Button primary>User Name</Button>
                                 :
                                 <Button primary>Sign Up</Button>
                         }

@@ -5,6 +5,7 @@ import {requiredCommonValdation} from '../../utils/FormFieldValidator';
 import renderInput from "../../renders/renderInput";
 
 const LoginForm = props => {
+
     const { handleSubmit, pristine, submitting, login} = props;
     return (    
                 <Grid.Column style={{maxWidth: 450}}>
@@ -32,6 +33,7 @@ const LoginForm = props => {
                         </Segment>
                     </Form>
                 </Grid.Column>      
+
     );
 };
 

@@ -9,6 +9,7 @@ import {Field, reduxForm} from "redux-form";
 import {default as renderInput} from "../../renders/renderInput";
 
 const SignupForm = props => {
+
     const { handleSubmit, pristine, submitting, signup} = props
     return (
                 <Grid.Column style={{maxWidth: 450}}>
@@ -39,6 +40,7 @@ const SignupForm = props => {
                         Already have an account? <Link to="/login">Log in</Link>
                     </Message>
                 </Grid.Column>      
+
     );
 };
 
