@@ -1,14 +1,13 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {Menu} from "semantic-ui-react";
 
-const NavBarSignOutButtons = () => {
+const NavBarSignOutButtons = ({logoutHandler}) => {
     return (
         <>
             <Menu.Item
-                as={Link}
-                name="logout"
-                to="/home"
+                
+                name="logout"                
+                onClick={(ev) => logoutHandler(ev)}
             >
                 Logout
             </Menu.Item>           

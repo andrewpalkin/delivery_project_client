@@ -1,4 +1,5 @@
 import React from 'react';
+import ss from '../sessionStorage';
 
 const FirebaseContext = React.createContext(null);
 /* eslint-disable   no-unused-expressions */
@@ -15,10 +16,11 @@ export const hopComponent = WrappedComponent => {
     }
 };
 
-export const withFirebase = Component => props => {
+export const withAuth = Component => props => {
+   
     return (
         <FirebaseContext.Consumer>
-            {firebase => <Component {...props} firebase={firebase}/>}
+            {firebase => <Component {...props} firebase={firebase} />}
         </FirebaseContext.Consumer>
     )
 };

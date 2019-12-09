@@ -6,7 +6,7 @@ import NavBarLoginSignUpButtons from "./NavBarLoginSignUpButtons";
 import NavBarSignOutButtons from "./NavBarSignOutButtons";
 
 const NavBarMenuComponent = props => {
-    const {isSign} = props;
+    const {isSign, logoutHandler} = props;
     return (
         <Visibility
             onBottomPassed={props.setShadowMenu}
@@ -33,7 +33,7 @@ const NavBarMenuComponent = props => {
                         </Dropdown>
                         <Menu.Item>
                             {isSign ? (
-                                <NavBarSignOutButtons/>
+                                <NavBarSignOutButtons logoutHandler={logoutHandler}/>
                             ) :
                             (
                                 <NavBarLoginSignUpButtons/>

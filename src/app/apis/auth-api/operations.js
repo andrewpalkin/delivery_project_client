@@ -1,5 +1,5 @@
 import {Creators} from "./actions";
-import firebase from "../../services/utils/Firebase/firebase";
+// import firebase from "../../services/utils/Firebase/firebase";
 import {default as sessionStorage} from "../../services/utils/sessionStorage";
 
 const signupRequest = Creators.signupRequest;
@@ -14,7 +14,8 @@ const loginFailure = Creators.loginFailure;
 const signOutRequest = Creators.signOutRequest;
 
 const signupOperation = payload => {
-    return async (dispatch) => {
+    return async (dispatch, getFirebase) => {
+        const firebase = getFirebase();
         // Dispatching this action will toggle the 'showRedditSpinner'
         // flag in the store, so that the UI can show a loading icon.
         dispatch(signupRequest());
@@ -36,7 +37,8 @@ const signupOperation = payload => {
 };
 
 const loginOperation = payload => {
-    return async (dispatch) => {
+    return async (dispatch, getFirebase) => {
+        const firebase = getFirebase();
         // Dispatching this action will toggle the 'showRedditSpinner'
         // flag in the store, so that the UI can show a loading icon.
         dispatch(loginRequest());
@@ -59,19 +61,24 @@ const loginOperation = payload => {
 };
 
 const signOutOperation = () => {
-    return (dispatch) => {
+    return (dispatch, getFirebase) => {
+        const firebase = getFirebase();
         dispatch(signOutRequest())
         try {
-            firebase
+            const user = firebase.auth().currentUser;
+            if (user) {
+                firebase
                 .auth()
                 .signOut()
                 .then(res => {
                     sessionStorage.removeItem('user');
-                    dispatch(signOutRequest({user: false}))
+                    dispatch(signOutRequest({res}));                    
                 })
                 .catch(err => {
                     dispatch(signOutRequest(err))
                 })    
+            }
+            
         } catch (err) {
             dispatch(signOutRequest()) 
         }     

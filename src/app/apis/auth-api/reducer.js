@@ -1,21 +1,14 @@
 import {createReducer} from 'reduxsauce';
 import Types from "./types";
 
-// next stime need to reworked it to more elegant way , with  middlelayer options 
-const user = JSON.stringify(localStorage.getItem('user'));
-
-const INITIAL_STATE = (user !== "null" && user !== undefined)
-    ? {error: false, singUp: true, isSign: true, user: user}
-    : {error: false, singUp: false, isSign: false, user: undefined};
-
-export const signupRequest = (state = INITIAL_STATE) => {
+export const signupRequest = (state) => {
     return {
         ...state,
         showSpinner: true
     };
 };
 
-export const signupSuccess = (state = INITIAL_STATE, action) => {    
+export const signupSuccess = (state, action) => {    
     return {
         ...state,
         showSpinner: false,
@@ -25,7 +18,7 @@ export const signupSuccess = (state = INITIAL_STATE, action) => {
     };
 };
 
-export const signupFailure = (state = INITIAL_STATE, action) => {
+export const signupFailure = (state, action) => {
     const {signupError} = action;
     return {
         ...state,
@@ -35,7 +28,7 @@ export const signupFailure = (state = INITIAL_STATE, action) => {
     };
 };
 
-export const loginRequest = (state = INITIAL_STATE) => {
+export const loginRequest = (state) => {
     return {
         ...state,
         showSpinner: true,
@@ -45,39 +38,33 @@ export const loginRequest = (state = INITIAL_STATE) => {
     };
 };
 
-export const loginSuccess = (state = INITIAL_STATE, action) => {
-    const {loginSuccess: {user}} = action;
+export const loginSuccess = (state) => {    
     return {
         ...state,
         showSpinner: false,
         isSignUp: true,
         isSign: true,
-        user: {            
-            email: user.email,
-            emailVerified: user.emailVerified,
-            uid: user.uid,
-            token: user.refreshToken
-        }
     };
 };
 
-export const loginFailure = (state = INITIAL_STATE, action) => {
+export const loginFailure = (state, action) => {
     const {loginFailure} = action;
     return {
         ...state,
-        showSpinner: true,        
+        showSpinner: false,        
         isSign: false,
         error: loginFailure,
     };
 };
 
-export const signOutOperation = (state = INITIAL_STATE, action) => {
+export const signOutRequest = (state, action) => {
     return {
         ...state,
-        showSpinner: true,
+        showSpinner: false,
         isSign: false,
         isSignUp: false,
-        user: undefined
+        user: undefined,
+
     };
 };
 
@@ -88,7 +75,8 @@ export const HANDLERS = {
     [Types.LOGIN_REQUEST]: loginRequest,
     [Types.LOGIN_SUCCESS]: loginSuccess,
     [Types.LOGIN_FAILURE]: loginFailure,
-    [Types.SIGNOUT_REQUEST]: signOutOperation
+    [Types.SIGNOUT_REQUEST]: signOutRequest
 };
 
+const INITIAL_STATE = {isLogged: false, isSignUp: false}; 
 export default createReducer(INITIAL_STATE, HANDLERS)

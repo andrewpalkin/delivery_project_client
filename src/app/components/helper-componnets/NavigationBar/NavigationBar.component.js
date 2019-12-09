@@ -1,16 +1,20 @@
 import React, {Component} from 'react';
 import styles from "./style.css.js";
+import {withAuth} from '../../../services/utils/Firebase';
 
 import NavBarMenuComponent from "./NavBarMenu.component";
 
-export default class NavigationBar extends Component {
+class NavigationBar extends Component {
 
-    state = {
-        menuFixed: false,
-        overlayFixed: false,
-        activeItem: "app",
-        menuStyle: styles.fixedMenuStyleWithoutShadow
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuFixed: false,
+            overlayFixed: false,
+            activeItem: "app",
+            menuStyle: styles.fixedMenuStyleWithoutShadow
+        };
+    }    
 
     setShadowMenu = () => {
         console.log(styles.fixedMenuStyleWithShadow);
@@ -20,7 +24,7 @@ export default class NavigationBar extends Component {
     unSetShadowMenu = () => {
         console.log(styles.fixedMenuStyleWithoutShadow);
         this.setState({menuStyle: styles.fixedMenuStyleWithoutShadow});
-    };
+    };   
 
     render() {
         const {
@@ -28,19 +32,22 @@ export default class NavigationBar extends Component {
             menuFixed,
             menuStyle
         } = this.state;
-        const {isSign} = this.props;
-
+        const {isLogin, logoutHandler} = this.props;
         return (
             <NavBarMenuComponent
-                isSign={isSign}
+                isSign={isLogin}
                 menuFixed={menuFixed}
                 handleItemClick={this.handleItemClick}
                 activeItem={activeItem}
                 menuStyle={menuStyle}
                 user={this.props.user}
                 setShadowMenu={this.setShadowMenu}
-                unSetShadowMenu={this.unSetShadowMenu}>
+                unSetShadowMenu={this.unSetShadowMenu}
+                logoutHandler={logoutHandler}
+                >
             </NavBarMenuComponent>
         )
     }
 }
+const NavigattorBarWithFirebase =  withAuth(NavigationBar);
+export default NavigattorBarWithFirebase;

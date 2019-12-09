@@ -1,5 +1,7 @@
 import {connect} from "react-redux";
 import NavigationBarComponent from "./NavigationBar.component";
+import operations from "../../../apis/auth-api/operations";
+
 
 const mapStateToProps = state => {
     return {
@@ -8,8 +10,19 @@ const mapStateToProps = state => {
     };
 };
 
+const mapDispatchToProps = dispatch => {
+    const logoutAction = () => {
+        dispatch(operations.signOutOperation());
+    }
+    return {
+        logoutHandler: logoutAction
+    }
+
+}
+
 const NavigationBarContainer = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(NavigationBarComponent);
 
 export default NavigationBarContainer;
