@@ -8,8 +8,12 @@ const onSubmitLogin = () => {
 };
 
 const Login = props => {
-    const {isSign} = props;
-    return (isSign) ? (
+    // const firebase = useFirebase();
+    // const auth = useSelector(state => state.firebase.auth)
+    // const firebaseLogin = (payload)  => {
+    //     return firebase.login({email: payload.email, password: payload.password})
+    // }
+    return ((props.auth.isLoaded)) ? (
         <Redirect to="/"/>
     ) : (
         <div className="signup-form">

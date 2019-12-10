@@ -1,14 +1,12 @@
 import {combineReducers} from "redux";
 import {reducer as formReducer} from "redux-form";
-import { reducer as firebase } from "react-redux-firebase";
-import authReducer from "./app/apis/auth-api";
+import { reducer  } from "react-redux-firebase";
 import userReducer from "./app/apis/user-api";
 
-const rootReducer = combineReducers({   
-    auth: authReducer,
+const rootReducer = combineReducers({       
     form: formReducer,
     user: userReducer,
-    firebase
+    firebase: reducer
 });
 
 export default rootReducer;

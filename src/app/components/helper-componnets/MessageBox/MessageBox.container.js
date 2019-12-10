@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import MessageBoxComponent from "./MessageBox.component";
 
 const mapStateToProps = state => {
-    const {auth: {error}} = state;
+    const {error} = state;
     if (!!error) {
         return {
             error: true,

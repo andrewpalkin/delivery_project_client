@@ -1,6 +1,6 @@
 import {Creators} from "./actions";
-// import firebase from "../../services/utils/Firebase/firebase";
 import {default as sessionStorage} from "../../services/utils/sessionStorage";
+import {firebase} from '../../services/utils/Firebase'
 
 const signupRequest = Creators.signupRequest;
 const signupSuccess = Creators.signupSuccess;
@@ -12,10 +12,8 @@ const loginFailure = Creators.loginFailure;
 
 // Logout 
 const signOutRequest = Creators.signOutRequest;
-
 const signupOperation = payload => {
-    return async (dispatch, getFirebase) => {
-        const firebase = getFirebase();
+    return async (dispatch, getState, getFirebase) => {       
         // Dispatching this action will toggle the 'showRedditSpinner'
         // flag in the store, so that the UI can show a loading icon.
         dispatch(signupRequest());
@@ -23,8 +21,7 @@ const signupOperation = payload => {
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(payload.email, payload.password)
-                .then(res => {
-                    dispatch(signupSuccess(res));
+                .then(res => {                    
                     sessionStorage.setItem("user", res.user);
                 })
                 .catch(err => {
@@ -37,32 +34,31 @@ const signupOperation = payload => {
 };
 
 const loginOperation = payload => {
-    return async (dispatch, getFirebase) => {
-        const firebase = getFirebase();
-        // Dispatching this action will toggle the 'showRedditSpinner'
-        // flag in the store, so that the UI can show a loading icon.
-        dispatch(loginRequest());
-        try {
-            firebase
-                .auth()
-                .signInWithEmailAndPassword(payload.email, payload.password)
-                .then(res => {
-                    dispatch(loginSuccess(res));
-                    sessionStorage.setItem("user", res.user);
-                })
-                .catch(err => {
-                    dispatch(loginFailure(err));
-                })
-        } catch (err) {
-            dispatch(loginFailure(err));
-        }
+    return async (dispatch, getState, getFirebase) => { 
+         dispatch(loginRequest());
+         const firebaseInstance  = getFirebase.getFirebase();
+
+             firebaseInstance.login({email: payload.email, password: payload.password})
+        // dispatch(loginRequest());
+        // try {
+        //     firebase
+        //         .login({email: payload.email, password: payload.password})              
+        //         .then(res => {
+        //             dispatch(loginSuccess(res));
+        //             sessionStorage.setItem("user", res.user);
+        //         })
+        //         .catch(err => {
+        //             dispatch(loginFailure(err));
+        //         })
+        // } catch (err) {
+        //     dispatch(loginFailure(err));
+        // }
 
     };
 };
 
 const signOutOperation = () => {
-    return (dispatch, getFirebase) => {
-        const firebase = getFirebase();
+    return (dispatch, getFirebase) => {       
         dispatch(signOutRequest())
         try {
             const user = firebase.auth().currentUser;

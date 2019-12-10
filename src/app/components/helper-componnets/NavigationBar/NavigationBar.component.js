@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import styles from "./style.css.js";
-import {withAuth} from '../../../services/utils/Firebase';
 
 import NavBarMenuComponent from "./NavBarMenu.component";
 
@@ -49,5 +48,5 @@ class NavigationBar extends Component {
         )
     }
 }
-const NavigattorBarWithFirebase =  withAuth(NavigationBar);
-export default NavigattorBarWithFirebase;
+
+export default NavigationBar;

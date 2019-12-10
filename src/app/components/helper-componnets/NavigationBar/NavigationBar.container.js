@@ -5,8 +5,7 @@ import operations from "../../../apis/auth-api/operations";
 
 const mapStateToProps = state => {
     return {
-        error: state.auth.errors,
-        isSign: state.auth.isSign
+        auth: state.firebase.auth
     };
 };
 

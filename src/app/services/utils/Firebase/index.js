@@ -1,5 +1,4 @@
-import FirebaseContext, {hopComponent, withAuth} from './context';
+import FirebaseProvider from './context';
 import firebase from './firebase';
-
-export default firebase;
-export {FirebaseContext, withAuth, hopComponent};
+export default FirebaseProvider;
+export {FirebaseProvider, firebase};
