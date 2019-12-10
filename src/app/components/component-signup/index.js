@@ -1,2 +1,2 @@
-import SignUpComponent from './signup.Container';
+import SignUpComponent from './signup.Component';
 export default SignUpComponent;

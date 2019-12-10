@@ -1,2 +1,2 @@
-import LoginMainContainer from './login.container';
+import LoginMainContainer from './login.component';
 export default LoginMainContainer;

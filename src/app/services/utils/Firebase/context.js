@@ -3,10 +3,9 @@ import {ReactReduxFirebaseProvider} from "react-redux-firebase";
 import fbInstance from './firebase';
 
 /* eslint-disable   no-unused-expressions */
-const ffConfig = {
-    userProfile: 'users',
+const ffConfig = {    
     enableLogging: false,
-    useFirestoreForProfile: true
+    useFirestoreForProfile: false
 };
 
 const FirebaseProvider = (props) => {

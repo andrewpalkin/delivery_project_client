@@ -1,13 +1,18 @@
 import React from "react";
 import {Menu} from "semantic-ui-react";
+import { useFirebase} from 'react-redux-firebase'
 
-const NavBarSignOutButtons = ({logoutHandler}) => {
+const NavBarSignOutButtons = () => {
+    const firebase = useFirebase();    
+    const firebaseLogout = ()  => {
+        return firebase.logout()
+    }    
     return (
         <>
             <Menu.Item
                 
                 name="logout"                
-                onClick={(ev) => logoutHandler(ev)}
+                onClick={(ev) => firebaseLogout(ev)}
             >
                 Logout
             </Menu.Item>           

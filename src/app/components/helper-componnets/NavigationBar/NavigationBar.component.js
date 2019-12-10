@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import styles from "./style.css.js";
-
 import NavBarMenuComponent from "./NavBarMenu.component";
 
 class NavigationBar extends Component {
+    
 
     constructor(props) {
         super(props);
@@ -12,7 +12,7 @@ class NavigationBar extends Component {
             overlayFixed: false,
             activeItem: "app",
             menuStyle: styles.fixedMenuStyleWithoutShadow
-        };
+        };        
     }    
 
     setShadowMenu = () => {
@@ -23,27 +23,23 @@ class NavigationBar extends Component {
     unSetShadowMenu = () => {
         console.log(styles.fixedMenuStyleWithoutShadow);
         this.setState({menuStyle: styles.fixedMenuStyleWithoutShadow});
-    };   
+    };       
 
     render() {
         const {
             activeItem,
             menuFixed,
             menuStyle
-        } = this.state;
-        const {isLogin, logoutHandler} = this.props;
+        } = this.state;        
         return (
-            <NavBarMenuComponent
-                isSign={isLogin}
+            <NavBarMenuComponent                
                 menuFixed={menuFixed}
                 handleItemClick={this.handleItemClick}
                 activeItem={activeItem}
-                menuStyle={menuStyle}
-                user={this.props.user}
+                menuStyle={menuStyle}                
                 setShadowMenu={this.setShadowMenu}
-                unSetShadowMenu={this.unSetShadowMenu}
-                logoutHandler={logoutHandler}
-                >
+                unSetShadowMenu={this.unSetShadowMenu}                
+            >
             </NavBarMenuComponent>
         )
     }
