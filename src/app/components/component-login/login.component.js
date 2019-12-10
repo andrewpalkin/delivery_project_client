@@ -3,6 +3,8 @@ import {Redirect} from "react-router-dom";
 import {Grid} from "semantic-ui-react";
 import LoginForm from "./login.form";
 import {MessageBox} from '../helper-componnets';
+import { useSelector } from 'react-redux'
+import { isLoaded, isEmpty } from 'react-redux-firebase'
 
 const onSubmitLogin = () => {
 };
@@ -13,7 +15,10 @@ const Login = props => {
     // const firebaseLogin = (payload)  => {
     //     return firebase.login({email: payload.email, password: payload.password})
     // }
-    return ((props.auth.isLoaded)) ? (
+    const auth = useSelector(state => state.firebase.auth)
+
+
+    return ((isLoaded(auth) && !isEmpty(auth))) ? (
         <Redirect to="/"/>
     ) : (
         <div className="signup-form">

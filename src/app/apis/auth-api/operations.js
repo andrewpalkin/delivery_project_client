@@ -38,21 +38,21 @@ const loginOperation = payload => {
          dispatch(loginRequest());
          const firebaseInstance  = getFirebase.getFirebase();
 
-             firebaseInstance.login({email: payload.email, password: payload.password})
+         //    firebaseInstance.login({email: payload.email, password: payload.password})
         // dispatch(loginRequest());
-        // try {
-        //     firebase
-        //         .login({email: payload.email, password: payload.password})              
-        //         .then(res => {
-        //             dispatch(loginSuccess(res));
-        //             sessionStorage.setItem("user", res.user);
-        //         })
-        //         .catch(err => {
-        //             dispatch(loginFailure(err));
-        //         })
-        // } catch (err) {
-        //     dispatch(loginFailure(err));
-        // }
+        try {
+            firebaseInstance
+                 .login({email: payload.email, password: payload.password})
+                 .then(res => {
+                     dispatch(loginSuccess(res));
+                     sessionStorage.setItem("user", res.user);
+                 })
+                 .catch(err => {
+                     dispatch(loginFailure(err));
+                 })
+         } catch (err) {
+             dispatch(loginFailure(err));
+         }
 
     };
 };

@@ -4,7 +4,7 @@ import {authOperations} from "../../apis/auth-api";
 
 const mapStateToProps = state => {
     return {
-        isSignUp: state.auth.isSignUp
+        auth: state.firebase.auth
     };
 };
 

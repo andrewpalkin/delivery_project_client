@@ -1,12 +1,13 @@
 import React from 'react';
-import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import {ReactReduxFirebaseProvider} from "react-redux-firebase";
 import fbInstance from './firebase';
-import  'firebase/database';
+
 /* eslint-disable   no-unused-expressions */
 const ffConfig = {
-    userProfile: 'users',    
-    enableLogging: false
-}
+    userProfile: 'users',
+    enableLogging: false,
+    useFirestoreForProfile: true
+};
 
 const FirebaseProvider = (props) => {
     const {store: {dispatch}} = props;
@@ -15,13 +16,13 @@ const FirebaseProvider = (props) => {
         config: ffConfig,
         dispatch,
         initializeAuth: true
-      }
-      return (    
-         <ReactReduxFirebaseProvider {...rrfProps}>
-             {props.children}
-         </ReactReduxFirebaseProvider>   
-      )    
-}
+    };
+    return (
+        <ReactReduxFirebaseProvider {...rrfProps}>
+            {props.children}
+        </ReactReduxFirebaseProvider>
+    )
+};
 
 
 export default FirebaseProvider;
