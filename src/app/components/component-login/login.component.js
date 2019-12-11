@@ -3,13 +3,21 @@ import {Redirect} from "react-router-dom";
 import {Grid} from "semantic-ui-react";
 import LoginForm from "./login.form";
 import {MessageBox} from '../helper-componnets';
+import { useSelector } from 'react-redux'
+import { isLoaded, isEmpty, useFirebase} from 'react-redux-firebase'
 
 const onSubmitLogin = () => {
 };
 
-const Login = props => {
-    const {user: {isLoged}} = props;
-    return (isLoged) ? (
+const Login = () => {
+    const firebase = useFirebase();    
+    const firebaseLogin = (payload)  => {
+        return firebase.login({email: payload.email, password: payload.password})
+    }
+    const auth = useSelector(state => state.firebase.auth)
+
+
+    return (isLoaded(auth) && !isEmpty(auth)) ? (
         <Redirect to="/"/>
     ) : (
         <div className="signup-form">
@@ -31,7 +39,7 @@ const Login = props => {
                 style={{height: "100%"}}
                 verticalAlign="middle"
             >
-                <LoginForm login={props.login} onSubmit={onSubmitLogin}/>
+                <LoginForm login={firebaseLogin} onSubmit={onSubmitLogin}/>
             </Grid>
         </div>
     );

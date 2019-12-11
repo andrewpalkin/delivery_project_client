@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import styles from "./style.css.js";
-
 import NavBarMenuComponent from "./NavBarMenu.component";
 
-export default class NavigationBar extends Component {
+class NavigationBar extends Component {
+    
 
-    state = {
-        menuFixed: false,
-        overlayFixed: false,
-        activeItem: "app",
-        menuStyle: styles.fixedMenuStyleWithoutShadow
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuFixed: false,
+            overlayFixed: false,
+            activeItem: "app",
+            menuStyle: styles.fixedMenuStyleWithoutShadow
+        };        
+    }    
 
     setShadowMenu = () => {
         console.log(styles.fixedMenuStyleWithShadow);
@@ -20,25 +23,26 @@ export default class NavigationBar extends Component {
     unSetShadowMenu = () => {
         console.log(styles.fixedMenuStyleWithoutShadow);
         this.setState({menuStyle: styles.fixedMenuStyleWithoutShadow});
-    };
+    };       
 
     render() {
         const {
             activeItem,
             menuFixed,
             menuStyle
-        } = this.state;
-
+        } = this.state;        
         return (
-            <NavBarMenuComponent
+            <NavBarMenuComponent                
                 menuFixed={menuFixed}
                 handleItemClick={this.handleItemClick}
                 activeItem={activeItem}
-                menuStyle={menuStyle}
-                user={this.props.user}
+                menuStyle={menuStyle}                
                 setShadowMenu={this.setShadowMenu}
-                unSetShadowMenu={this.unSetShadowMenu}>
+                unSetShadowMenu={this.unSetShadowMenu}                
+            >
             </NavBarMenuComponent>
         )
     }
 }
+
+export default NavigationBar;

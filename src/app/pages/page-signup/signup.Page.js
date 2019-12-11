@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import SignUpMainContainer from "../../components/component-signup/signup.Container";
+import SignUpMainContainer from "../../components/component-signup";
 
 class SignUpPage extends Component {
     render() {

@@ -4,14 +4,14 @@ import {Container} from "semantic-ui-react";
 import HomePage from "./pages/page-home/home.Page";
 import SignUpPage from "./pages/page-signup/signup.Page";
 import SigninPage from "./pages/page-signin/signin.Page";
-import NavigationBar from "./components/helper-componnets/NavigationBar/NavigationBar.container";
+import NavigationBar from "./components/helper-componnets/NavigationBar/NavigationBar.component";
 
 class App extends Component {
     render() {
         return (
             <BrowserRouter>
                 <div>
-                    <NavigationBar/>
+                    <NavigationBar />
                     <Container style={{marginTop: "100px", minHeight: "85vh"}}>
                         <Switch>
                             <Route exact path="/" component={HomePage}/>

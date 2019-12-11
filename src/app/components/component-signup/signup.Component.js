@@ -1,17 +1,21 @@
 import React from "react";
-
 import {Redirect} from "react-router-dom";
 import {Grid} from "semantic-ui-react";
-import {withFirebase} from '../../services/utils/Firebase'
 import SignupForm from "./signup.Form";
 import {MessageBox} from '../helper-componnets';
+import { useSelector } from 'react-redux'
+import { isLoaded, isEmpty, useFirebase} from 'react-redux-firebase'
 
 const onSubmitSignup = () => {
 };
 
-const Signup = props => {
-    const {user} = props;
-    return user.uid ? (
+const Signup = () => {
+    const firebase = useFirebase();    
+    const firebaseSignin = (payload)  => {
+        return firebase.createUser({email: payload.email, password: payload.password})
+    }
+    const auth = useSelector(state => state.firebase.auth)
+    return (isLoaded(auth) && !isEmpty(auth)) ? (
         <Redirect to="/login"/>
     ) : (
         <div className="signup-form">
@@ -33,11 +37,10 @@ const Signup = props => {
                 style={{height: "100%"}}
                 verticalAlign="middle"
             >
-                <SignupForm signup={props.signup} onSubmit={onSubmitSignup}/>
+                <SignupForm signup={firebaseSignin} onSubmit={onSubmitSignup}/>
             </Grid>
         </div>
     );
 };
-const SignupWidget = withFirebase(Signup);
 
-export default SignupWidget;
+export default Signup;

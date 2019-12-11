@@ -1,26 +1,27 @@
 import React from 'react';
+import {ReactReduxFirebaseProvider} from "react-redux-firebase";
+import fbInstance from './firebase';
 
-const FirebaseContext = React.createContext(null);
 /* eslint-disable   no-unused-expressions */
-
-export const hopComponent = WrappedComponent => {
-    return class extends React.Component {
-        constructor(props) {
-            super(props);
-            this.data = {data: "1"}
-        }
-        render() {
-            return <WrappedComponent data={this.data} {...this.props}/>
-        }
-    }
+const ffConfig = {    
+    enableLogging: false,
+    useFirestoreForProfile: false
 };
 
-export const withFirebase = Component => props => {
+const FirebaseProvider = (props) => {
+    const {store: {dispatch}} = props;
+    const rrfProps = {
+        firebase: fbInstance,
+        config: ffConfig,
+        dispatch,
+        initializeAuth: true
+    };
     return (
-        <FirebaseContext.Consumer>
-            {firebase => <Component {...props} firebase={firebase}/>}
-        </FirebaseContext.Consumer>
+        <ReactReduxFirebaseProvider {...rrfProps}>
+            {props.children}
+        </ReactReduxFirebaseProvider>
     )
 };
 
-export default FirebaseContext;
+
+export default FirebaseProvider;

@@ -1,10 +1,14 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {Dropdown, Header, Menu, Visibility} from "semantic-ui-react";
-
+import { useSelector } from 'react-redux'
+import { isLoaded, isEmpty} from 'react-redux-firebase'
 import NavBarLoginSignUpButtons from "./NavBarLoginSignUpButtons";
+import NavBarSignOutButtons from "./NavBarSignOutButtons";
 
-const NavBarMenuComponent = props => {
+const NavBarMenuComponent = (props) => {
+    const auth = useSelector(state => state.firebase.auth);
+    const isAuth = isLoaded(auth) && !isEmpty(auth);
     return (
         <Visibility
             onBottomPassed={props.setShadowMenu}
@@ -16,6 +20,7 @@ const NavBarMenuComponent = props => {
                     <Menu.Item
                         as={Link}
                         onClick={props.handleItemClick}
+                        to=''
                     >
                         <Header>OUR APP HEADER</Header>
                     </Menu.Item>
@@ -29,7 +34,14 @@ const NavBarMenuComponent = props => {
                             </Dropdown.Menu>
                         </Dropdown>
                         <Menu.Item>
-                            <NavBarLoginSignUpButtons/>
+                            {isAuth ? (
+                                <NavBarSignOutButtons />
+                            ) :
+                            (
+                                <NavBarLoginSignUpButtons/>
+                            )
+                        }
+                            
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu>

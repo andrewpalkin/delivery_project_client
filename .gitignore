@@ -28,3 +28,4 @@ yarn-error.log*
 /delivery_project_client_new.iml
 
 /.vscode/
+.env
