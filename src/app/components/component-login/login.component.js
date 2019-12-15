@@ -1,27 +1,39 @@
-import React from "react";
+import React, {useState} from "react";
 import {Redirect} from "react-router-dom";
-import {Grid} from "semantic-ui-react";
+import {Grid, Message} from "semantic-ui-react";
 import LoginForm from "./login.form";
-import {MessageBox} from '../helper-componnets';
-import { useSelector } from 'react-redux'
-import { isLoaded, isEmpty, useFirebase} from 'react-redux-firebase'
+import {useSelector} from 'react-redux'
+import {isEmpty, isLoaded, useFirebase} from 'react-redux-firebase'
 
 const onSubmitLogin = () => {
 };
 
 const Login = () => {
-    const firebase = useFirebase();    
-    const firebaseLogin = (payload)  => {
-        return firebase.login({email: payload.email, password: payload.password})
-    }
-    const auth = useSelector(state => state.firebase.auth)
+    const [errorMessage, setErrorMessage] = useState("");
 
+    const firebase = useFirebase();
+
+    const firebaseLogin = (payload) => {
+        firebase.login({email: payload.email, password: payload.password})
+            .then()
+            .catch((error) => {
+                setErrorMessage(error.message);
+            });
+    };
+
+    const auth = useSelector(state => state.firebase.auth);
 
     return (isLoaded(auth) && !isEmpty(auth)) ? (
         <Redirect to="/"/>
     ) : (
         <div className="signup-form">
-            <MessageBox error={'true'} message={'Need to verify email'}/>
+            {errorMessage &&
+            <Message negative>
+                <Message.Header>Unable to login</Message.Header>
+                <p>{errorMessage}</p>
+            </Message>
+            }
+
             {/*
               Heads up! The styles below are necessary for the correct render of this example.
               You can do same with CSS, the main idea is that all the elements up to the `Grid`
