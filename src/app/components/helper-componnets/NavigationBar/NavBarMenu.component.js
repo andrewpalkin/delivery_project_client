@@ -35,6 +35,7 @@ const NavBarMenuComponent = (props) => {
                         <Menu.Item>
                             <Dropdown
                                 fluid
+                                floating
                                 options={languageOptions}
                                 defaultValue={languageOptions[0].value}
                             />
@@ -47,6 +48,7 @@ const NavBarMenuComponent = (props) => {
                                     <NavBarLoginSignUpButtons/>
                                 )
                             }
+
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu>
