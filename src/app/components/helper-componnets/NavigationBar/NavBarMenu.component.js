@@ -1,14 +1,20 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {Dropdown, Header, Menu, Visibility} from "semantic-ui-react";
-import { useSelector } from 'react-redux'
-import { isLoaded, isEmpty} from 'react-redux-firebase'
+import {useSelector} from 'react-redux'
+import {isEmpty, isLoaded} from 'react-redux-firebase'
 import NavBarLoginSignUpButtons from "./NavBarLoginSignUpButtons";
 import NavBarSignOutButtons from "./NavBarSignOutButtons";
 
 const NavBarMenuComponent = (props) => {
     const auth = useSelector(state => state.firebase.auth);
     const isAuth = isLoaded(auth) && !isEmpty(auth);
+    const languageOptions = [
+        {key: 'us', value: 'us', flag: 'us', text: 'English'},
+        {key: 'ru', value: 'ru', flag: 'ru', text: 'Russian'},
+        {key: 'il', value: 'il', flag: 'il', text: 'Hebrew'}
+    ];
+
     return (
         <Visibility
             onBottomPassed={props.setShadowMenu}
@@ -26,22 +32,21 @@ const NavBarMenuComponent = (props) => {
                     </Menu.Item>
 
                     <Menu.Menu position="right">
-                        <Dropdown item text='Language'>
-                            <Dropdown.Menu>
-                                <Dropdown.Item>English</Dropdown.Item>
-                                <Dropdown.Item>Russian</Dropdown.Item>
-                                <Dropdown.Item>Spanish</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
+                        <Menu.Item>
+                            <Dropdown
+                                fluid
+                                options={languageOptions}
+                                defaultValue={languageOptions[0].value}
+                            />
+                        </Menu.Item>
                         <Menu.Item>
                             {isAuth ? (
-                                <NavBarSignOutButtons />
-                            ) :
-                            (
-                                <NavBarLoginSignUpButtons/>
-                            )
-                        }
-                            
+                                    <NavBarSignOutButtons/>
+                                ) :
+                                (
+                                    <NavBarLoginSignUpButtons/>
+                                )
+                            }
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu>
