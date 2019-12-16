@@ -5,7 +5,7 @@ export const requiredCommonValdation = values => {
     const requiredFields = ['email', 'password'];
     requiredFields.forEach(field => {
         if (values[field] === undefined) {
-            errors[field] = 'Reqired'
+            errors[field] = 'Required'
         }
     });
     if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
