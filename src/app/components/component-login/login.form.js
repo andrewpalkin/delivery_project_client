@@ -8,7 +8,7 @@ import renderInput from "../../renders/renderInput";
 const LoginForm = props => {
     const {handleSubmit, pristine, submitting, login} = props;
     return (
-        <Grid.Column style={{maxWidth: 450}}>
+        <Grid.Column style={{maxWidth: 480}}>
             <Header as="h2" color="teal" textAlign="center">
                 Login
             </Header>

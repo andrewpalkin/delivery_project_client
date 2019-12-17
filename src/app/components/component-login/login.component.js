@@ -2,19 +2,15 @@ import React, {useState} from "react";
 import {Redirect} from "react-router-dom";
 import {Grid, Message} from "semantic-ui-react";
 import LoginForm from "./login.form";
-import {MessageBox} from '../helper-componnets';
-import { useSelector } from 'react-redux'
-import { isLoaded, isEmpty, useFirebase} from 'react-redux-firebase'
-
+import {useSelector} from 'react-redux'
+import {isEmpty, isLoaded, useFirebase} from 'react-redux-firebase'
 
 const onSubmitLogin = () => {
 };
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
-
     const firebase = useFirebase();
-
     const firebaseLogin = (payload) => {
         firebase.login({email: payload.email, password: payload.password})
             .then()
@@ -28,7 +24,7 @@ const Login = () => {
     return (isLoaded(auth) && !isEmpty(auth)) ? (
         <Redirect to="/"/>
     ) : (
-        <div className="signup-form">
+        <div className="login-form">
             {errorMessage &&
             <Message negative>
                 <Message.Header>Unable to login</Message.Header>
@@ -44,7 +40,7 @@ const Login = () => {
             <style>{`
                   body > div,
                   body > div > div,
-                  body > div > div > div.signup-form {
+                  body > div > div > div.login-form {
                     height: 100%;
                 }
                `}</style>
