@@ -1,15 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {Dropdown, Header, Menu, Visibility} from "semantic-ui-react";
-
 import { useSelector } from 'react-redux'
 import { isLoaded, isEmpty} from 'react-redux-firebase'
 import NavBarLoginSignUpButtons from "./NavBarLoginSignUpButtons";
 import NavBarSignOutButtons from "./NavBarSignOutButtons";
-import {isEmpty, isLoaded} from 'react-redux-firebase'
-const NavBarMenuComponent = (props) => {
-    const auth = useSelector(state => state.firebase.auth);
-    const isAuth = isLoaded(auth) && !isEmpty(auth);
+
 
 const NavBarMenuComponent = (props) => {
     const auth = useSelector(state => state.firebase.auth);

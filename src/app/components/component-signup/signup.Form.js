@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import {
   Button,
   Form,
-  Container,
   Header,
   Message,
   Segment,
@@ -16,8 +15,21 @@ import { Field, reduxForm } from "redux-form";
 
 import { default as renderInput } from "../../renders/renderInput";
 
+const renderRadio = field => (
+    <Form.Radio
+      checked={field.input.value === field.radioValue}
+      label={field.label}
+      name={field.input.name}
+      onChange={(e, { checked }) => field.input.onChange(field.radioValue)}
+    />
+  );
+
 const SignupForm = props => {
+
   const { handleSubmit, pristine, submitting, signup } = props;
+
+  //const handleChange = (e, { value }) => this.setState({ value })
+
   return (
     <Fragment>
       <Grid verticalAlign="middle" textAlign="center">
@@ -67,6 +79,31 @@ const SignupForm = props => {
                   placeholder="Password Confirmation"
                   name="passwordConfirmation"
                 />
+                 <Form.Group inline>
+                    <label>Gender</label>
+
+                    <Field
+                        component={renderRadio}
+                        label="Female"
+                        name="female"
+                        value='1'
+                        radioValue={1}
+                    />
+                    <Field
+                        component={renderRadio}
+                        label="Male"
+                        name="Male"
+                        value='2'
+                        radioValue={2}
+                    />
+                    <Field
+                        component={renderRadio}
+                        label="Custom"
+                        name="Custom"
+                        value='3'
+                        radioValue={3}
+                    />
+                </Form.Group>
                 <Button
                   color="teal"
                   fluid
