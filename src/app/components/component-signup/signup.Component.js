@@ -33,23 +33,9 @@ const Signup = () => {
                 <p>{errorMessage}</p>
             </Message>
             }
-
-            {/*
-              Heads up! The styles below are necessary for the correct render of this example.
-              You can do same with CSS, the main idea is that all the elements up to the `Grid`
-              below must have a height of 100%.
-            */}
-            <style>{`
-                  body > div,
-                  body > div > div,
-                  body > div > div > div.signup-form {
-                    height: 100%;
-                }
-               `}</style>
             <Grid
-                textAlign="center"
                 style={{height: "100%"}}
-                verticalAlign="middle"
+                centered
             >
                 <SignupForm signup={firebaseSignup} onSubmit={onSubmitSignup}/>
             </Grid>

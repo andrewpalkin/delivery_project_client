@@ -33,7 +33,8 @@ const LoginForm = props => {
                             disabled={pristine || submitting}>Login</Button>
                 </Segment>
             </Form>
-            <Message>
+
+            <Message style={{textAlign: "center"}}>
                 New to us? <Link to="/signup">Sign Up</Link>
             </Message>
         </Grid.Column>
