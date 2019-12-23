@@ -1,14 +1,18 @@
 import React, {Component} from "react";
 import Constants from "../../services/utils/Google/google";
 import ProfileContainer from "../../components/component-profile";
+
 class HomePage extends Component {
-    render() {
+    componentDidMount() {
         window.gtag('config', Constants.GA_TRACKING_ID, {
             'page_title': 'React App',
             'page_path': '/profile'
         });
+    }
+
+    render() {
         return (
-            <ProfileContainer />
+            <ProfileContainer/>
         );
     }
 }
