@@ -5,6 +5,7 @@ import HomePage from "./pages/page-home/home.Page";
 import SignUpPage from "./pages/page-signup/signup.Page";
 import SigninPage from "./pages/page-signin/signin.Page";
 import NavigationBar from "./components/helper-componnets/NavigationBar/NavigationBar.component";
+import ProfilePage from './pages/page-profile/profile.Page'
 
 class App extends Component {
     render() {
@@ -17,6 +18,9 @@ class App extends Component {
                             <Route exact path="/" component={HomePage}/>
                             <Route exact path="/signup" component={SignUpPage}/>
                             <Route exact path="/login" component={SigninPage}/>
+
+                            <Route exact path="/profile" component={ProfilePage}/>
+                            
                         </Switch>
                     </Container>
                 </div>
