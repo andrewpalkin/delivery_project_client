@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {Button, Form, Grid, Header, Icon, Message, Segment} from "semantic-ui-react";
+import {Button, Form, Grid, Header, Icon, Message, Segment, Checkbox } from "semantic-ui-react";
 import {requiredCommonValdation} from "../../utils/FormFieldValidator";
 
 import {Field, reduxForm} from "redux-form";
@@ -16,6 +16,43 @@ const renderRadio = field => (
         onChange={() => field.input.onChange(field.radioValue)}
     />
 );
+
+const renderCheckbox = ({
+    input: { value, onChange, ...input },
+    meta: { touched, error },
+    ...rest
+  }) => (
+    <Form.Field error={!!(touched && error)}>
+      <Checkbox
+        {...input}
+        {...rest}
+        defaultChecked={!!value}
+        onChange={(e, data) => onChange(data.checked)}
+        type="checkbox"        
+      />
+      {/* {touched && error && <span>{error}</span>} */}
+    </Form.Field>
+  );
+
+  const radioGroup = ({input: {onChange, name, value}, meta: {touched, error}, options}) => {
+
+      const radioSet = options.map(opt => (
+          <Form.Radio 
+                checked={value === opt.radioValue}
+                label={opt.label}
+                name={name}
+                onChange={() => onChange(opt.radioValue)}
+          />
+      ))
+      return (
+        <Form.Group inline>
+        <label>Genders</label>
+        <Form.Field error={!!(touched && error)}>
+            {radioSet}
+          </Form.Field>
+        </Form.Group>         
+      )
+  }
 
 
 let SignupForm = props => {
@@ -68,32 +105,21 @@ let SignupForm = props => {
                         placeholder="Password Confirmation"
                         name="passwordConfirmation"
                     />
-                    <Form.Group inline>
-                        <label>Gender</label>
-
-                        <Field
-                            component={renderRadio}
-                            label="Female"
-                            name="radioGender"
-                            value='1'
-                            radioValue={1}
-                        />
-                        <Field
-                            component={renderRadio}
-                            label="Male"
-                            name="radioGender"
-                            value='2'
-                            radioValue={2}
-                        />
-                        <Field
-                            component={renderRadio}
-                            label="Other"
-                            name="radioGender"
-                            value='3'
-                            radioValue={3}
-                        />
-                    </Form.Group>
-                    <Form.Checkbox inline label='I agree to the Terms and Conditions'/>
+                    <Field 
+                        component={radioGroup}
+                        name="radioGender"
+                        options={[
+                            {label: "Female", value: '1', radioValue: '1'},
+                            {label: "Male", value: '2', radioValue: '2'},
+                            {label: "Other", value: '3', radioValue: '3'}
+                        ]
+                        }
+                    />                    
+                    <Field 
+                        name="agrement"
+                        label='I agree to the Terms and Conditions'
+                        component={renderCheckbox}
+                    />                    
                     <Button
                         color="teal"
                         fluid
