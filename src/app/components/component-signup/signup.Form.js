@@ -1,59 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {Button, Form, Grid, Header, Icon, Message, Segment, Checkbox } from "semantic-ui-react";
+import {Button, Form, Grid, Header, Icon, Message, Segment } from "semantic-ui-react";
 import {requiredCommonValdation} from "../../utils/FormFieldValidator";
 
 import {Field, reduxForm} from "redux-form";
 
-import {default as renderInput} from "../../renders/renderInput";
-
-const renderRadio = field => (
-    <Form.Radio
-        checked={field.input.value === field.radioValue}
-        label={field.label}
-        name={field.input.name}
-        onChange={() => field.input.onChange(field.radioValue)}
-    />
-);
-
-const renderCheckbox = ({
-    input: { value, onChange, ...input },
-    meta: { touched, error },
-    ...rest
-  }) => (
-    <Form.Field error={!!(touched && error)}>
-      <Checkbox
-        {...input}
-        {...rest}
-        defaultChecked={!!value}
-        onChange={(e, data) => onChange(data.checked)}
-        type="checkbox"        
-      />
-      {/* {touched && error && <span>{error}</span>} */}
-    </Form.Field>
-  );
-
-  const radioGroup = ({input: {onChange, name, value}, meta: {touched, error}, options}) => {
-
-      const radioSet = options.map(opt => (
-          <Form.Radio 
-                checked={value === opt.radioValue}
-                label={opt.label}
-                name={name}
-                onChange={() => onChange(opt.radioValue)}
-          />
-      ))
-      return (
-        <Form.Group inline>
-        <label>Genders</label>
-        <Form.Field error={!!(touched && error)}>
-            {radioSet}
-          </Form.Field>
-        </Form.Group>         
-      )
-  }
-
+import {default as InputComponent} from "../../renders/renderInput";
+const {
+    renderInput, 
+    radioGroup,
+    renderCheckbox
+} = InputComponent;
 
 let SignupForm = props => {
     const {handleSubmit, pristine, submitting, signup} = props;
