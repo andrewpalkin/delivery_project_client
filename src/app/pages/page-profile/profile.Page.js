@@ -1,20 +1,20 @@
 import React, {Component} from "react";
-import LoginMainContainer from "../../components/component-login";
 import Constants from "../../services/utils/Google/google";
+import ProfileContainer from "../../components/component-profile";
 
-class LoginPage extends Component {
+class HomePage extends Component {
     componentDidMount() {
         window.gtag('config', Constants.GA_TRACKING_ID, {
             'page_title': 'React App',
-            'page_path': '/login'
+            'page_path': '/profile'
         });
     }
 
     render() {
         return (
-            <LoginMainContainer/>
+            <ProfileContainer/>
         );
     }
 }
 
-export default LoginPage;
+export default HomePage;

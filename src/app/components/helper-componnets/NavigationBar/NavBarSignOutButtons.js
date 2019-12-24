@@ -1,21 +1,53 @@
 import React from "react";
-import {Menu} from "semantic-ui-react";
-import { useFirebase} from 'react-redux-firebase'
+import {Dropdown, Image, Menu} from "semantic-ui-react";
+import {useHistory} from "react-router-dom";
+import {useFirebase} from 'react-redux-firebase'
 
 const NavBarSignOutButtons = () => {
-    const firebase = useFirebase();    
-    const firebaseLogout = ()  => {
+    const firebase = useFirebase();
+    let history = useHistory();
+    const firebaseLogout = () => {
         return firebase.logout()
-    }    
+    };
+
+    const profileButton = () => {
+        history.push("/profile")
+    };
+
+    const options = [
+        {
+            key: 'usersigned',
+            text: (
+                <span>
+                Signed in as <strong>Bob Smith</strong>
+              </span>
+            ),
+            disabled: true,
+        },
+        {key: 'user', text: 'Profile', icon: 'user', onClick: profileButton},
+        {key: 'settings', text: 'Settings', icon: 'settings'},
+        {key: 'sign-out', text: 'Sign Out', icon: 'sign out', onClick: firebaseLogout}
+    ];
+
+    const trigger = (
+        <span>
+          <Image avatar src={"https://react.semantic-ui.com/images/avatar/small/elliot.jpg"}/> {'user'}
+        </span>
+    );
+
     return (
         <>
             <Menu.Item
-                
-                name="logout"                
+                name="logout"
                 onClick={(ev) => firebaseLogout(ev)}
             >
-                Logout
-            </Menu.Item>           
+                <Dropdown
+                    trigger={trigger}
+                    options={options}
+                    pointing='top left'
+                    icon={null}
+                />
+            </Menu.Item>
         </>
     );
 };

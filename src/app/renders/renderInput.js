@@ -1,32 +1,40 @@
 import React from "react";
-import {Form, Input, Label, Transition} from "semantic-ui-react";
+import {Form, Label, Transition} from "semantic-ui-react";
 
-// simple form field example with validations 
-export const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
-    <div>
-        <label>{label}</label>
-        <div>
-            <Form.Input {...input} placeholder={label} type={type}/>
-            {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-        </div>
-    </div>
-);
+const renderInput = field => (
+    <>
+        <Form.Input
+            label={field.label}
+            name={field.input.name}
+            value={field.input.value}
+            type={field.type}
+            icon={field.icon}
+            iconPosition={field.iconPosition}
+            onChange={(e, {value}) => field.input.onChange(value)}
+            error={!!(field.meta.touched && field.meta.error)}
+            placeholder={field.placeholder}
+            maxLength={field.maxLength}
+        />
 
-// styled visualisation of erros and warnings
-const renderInput = ({input, label, type, placeholder, meta: {touched, error, warning}, as: As = Input, ...props}) => (
-    <Form.Field>
-        <As {...props} {...input} value={input.value} label={label} placeholder={placeholder} type={type}/>
-        <Transition animation="fade up" duration={{hide: 0, show: 500}} visible={(touched && (!!error || !!warning))}>
+        <Transition
+            animation="fade up"
+            duration={{hide: 0, show: 500}}
+            visible={!!(field.meta.touched && field.meta.error) && field.meta.error !== 'Required'}
+        >
             <Label
                 basic
-                color='red'
                 pointing
+                style={{
+                    marginTop: "0px",
+                    marginBottom: "10px",
+                    color: "#9f3a38",
+                    borderColor: "#e0b4b4"
+                }}
             >
-                {
-                    error || warning
-                }
+                {field.meta.error}
             </Label>
         </Transition>
-    </Form.Field>
+    </>
 );
+
 export default renderInput;

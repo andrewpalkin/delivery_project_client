@@ -4,6 +4,7 @@ import fbInstance from './firebase';
 
 /* eslint-disable   no-unused-expressions */
 const ffConfig = {    
+    userProfile: 'users',
     enableLogging: false,
     useFirestoreForProfile: false
 };
