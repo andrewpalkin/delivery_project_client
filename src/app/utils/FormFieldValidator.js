@@ -2,7 +2,7 @@
 export const requiredCommonValdation = values => {
     const errors = {};
     // case to get all field what should beenn passing to validation 
-    const requiredFields = ['email', 'password', 'firstName', 'lastName'];
+    const requiredFields = ['email', 'password', 'firstName', 'lastName','agrement','radioGender'];
     requiredFields.forEach(field => {
         if (values[field] === undefined) {
             errors[field] = 'Required'
