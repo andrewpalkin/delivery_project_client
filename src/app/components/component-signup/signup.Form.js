@@ -1,17 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {Button, Form, Grid, Header, Icon, Message, Segment } from "semantic-ui-react";
-import {requiredCommonValdation} from "../../utils/FormFieldValidator";
+import {Button, Form, Grid, Header, Icon, Message, Segment} from "semantic-ui-react";
+import {requiredCommonValidation} from "../../utils/FormFieldValidator";
 
 import {Field, reduxForm} from "redux-form";
 
-import {default as InputComponent} from "../../renders/renderInput";
+import inputsObject from "../../renders/renderInput";
+
 const {
-    renderInput, 
+    renderInput,
     radioGroup,
     renderCheckbox
-} = InputComponent;
+} = inputsObject;
 
 let SignupForm = props => {
     const {handleSubmit, pristine, submitting, signup} = props;
@@ -63,7 +64,7 @@ let SignupForm = props => {
                         placeholder="Password Confirmation"
                         name="passwordConfirmation"
                     />
-                    <Field 
+                    <Field
                         component={radioGroup}
                         name="radioGender"
                         options={[
@@ -72,12 +73,12 @@ let SignupForm = props => {
                             {label: "Other", value: '3', radioValue: '3'}
                         ]
                         }
-                    />                    
-                    <Field 
-                        name="agrement"
+                    />
+                    <Field
+                        name="agreement"
                         label='I agree to the Terms and Conditions'
                         component={renderCheckbox}
-                    />                    
+                    />
                     <Button
                         color="teal"
                         fluid
@@ -115,7 +116,7 @@ SignupForm.propTypes = {
 
 SignupForm = reduxForm({
     form: "signupForm",
-    validate: requiredCommonValdation
+    validate: requiredCommonValidation
 })(SignupForm);
 
 export default SignupForm;

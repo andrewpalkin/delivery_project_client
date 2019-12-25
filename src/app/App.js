@@ -4,7 +4,7 @@ import {Container} from "semantic-ui-react";
 import HomePage from "./pages/page-home/home.Page";
 import SignUpPage from "./pages/page-signup/signup.Page";
 import SigninPage from "./pages/page-signin/signin.Page";
-import NavigationBar from "./components/helper-componnets/NavigationBar/NavigationBar.component";
+import NavigationBar from "./components/helper-components/NavigationBar/NavigationBar.component";
 import ProfilePage from './pages/page-profile/profile.Page'
 
 class App extends Component {

@@ -2,10 +2,15 @@ import React from "react";
 import {Button, Form, Grid, Header, Message, Segment} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
-import {requiredCommonValdation} from '../../utils/FormFieldValidator';
-import renderInput from "../../renders/renderInput";
+import {requiredCommonValidation} from '../../utils/FormFieldValidator';
 
-const LoginForm = props => {
+import inputsObject from "../../renders/renderInput";
+
+const {
+    renderInput
+} = inputsObject;
+
+let LoginForm = props => {
     const {handleSubmit, pristine, submitting, login} = props;
     return (
         <Grid.Column style={{maxWidth: 480}}>
@@ -41,7 +46,10 @@ const LoginForm = props => {
     );
 };
 
-export default reduxForm({
+LoginForm = reduxForm({
     form: "loginForm",
-    validate: requiredCommonValdation
+    validate: requiredCommonValidation
 })(LoginForm);
+
+export default LoginForm;
+

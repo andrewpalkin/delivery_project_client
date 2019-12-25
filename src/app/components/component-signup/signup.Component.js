@@ -8,7 +8,7 @@ import {isEmpty, isLoaded, useFirebase} from "react-redux-firebase";
 const onSubmitSignup = () => {
 };
 
-const Signup = () => {
+const SignUpComponent = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const firebase = useFirebase();
@@ -43,4 +43,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default SignUpComponent;

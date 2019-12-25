@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Label, Transition, Checkbox} from "semantic-ui-react";
+import {Checkbox, Form, Label, Transition} from "semantic-ui-react";
 
 const renderInput = field => (
     <>
@@ -38,54 +38,41 @@ const renderInput = field => (
 );
 
 const renderCheckbox = ({
-    input: { value, onChange, ...input },
-    meta: { touched, error },
-    ...rest
-  }) => (
+                            input: {value, onChange, ...input},
+                            meta: {touched, error},
+                            ...rest
+                        }) => (
     <Form.Field error={!!(touched && error)}>
-      <Checkbox
-        {...input}
-        {...rest}
-        defaultChecked={!!value}
-        onChange={(e, data) => onChange(data.checked)}
-        type="checkbox"        
-      />
-      {/* {touched && error && <span>{error}</span>} */}
+        <Checkbox
+            {...input}
+            {...rest}
+            defaultChecked={!!value}
+            onChange={(e, data) => onChange(data.checked)}
+        />
+        {/* {touched && error && <span>{error}</span>} */}
     </Form.Field>
-  );
-
-  const radioGroup = ({input: {onChange, name, value}, meta: {touched, error}, options}) => {
-
-      const radioSet = options.map(opt => (
-          <Form.Radio 
-                checked={value === opt.radioValue}
-                label={opt.label}
-                name={name}
-                onChange={() => onChange(opt.radioValue)}
-          />
-      ))
-      return (
-        <Form.Group inline>
-        <label>Genders</label>
-        <Form.Field error={!!(touched && error)}>
-            {radioSet}
-          </Form.Field>
-        </Form.Group>         
-      )
-  }
-
-const renderRadio = field => (
-    <Form.Radio
-        checked={field.input.value === field.radioValue}
-        label={field.label}
-        name={field.input.name}
-        onChange={() => field.input.onChange(field.radioValue)}
-    />
 );
 
+const radioGroup = ({input: {onChange, name, value}, meta: {touched, error}, options}) => {
+
+    const radioSet = options.map(opt => (
+        <Form.Radio error={!!(touched && error)}
+            checked={value === opt.radioValue}
+            label={opt.label}
+            name={name}
+            onChange={() => onChange(opt.radioValue)}
+        />
+    ));
+    return (
+        <Form.Group inline>
+            <label>Genders</label>
+            {radioSet}
+        </Form.Group>
+    )
+};
+
 export default {
-    renderInput, 
+    renderInput,
     radioGroup,
     renderCheckbox
-    
- };
+};
