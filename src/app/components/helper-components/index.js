@@ -1,5 +1,6 @@
-import MessageBox from './MessageBox/MessageBox.container'
-export {MessageBox}
+import MessageBox from './MessageBox/MessageBox.container';
+
+export { MessageBox };
 export default {
-    MessageBox
+  MessageBox
 };

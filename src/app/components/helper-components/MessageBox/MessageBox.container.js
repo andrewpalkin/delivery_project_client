@@ -1,18 +1,18 @@
-import {connect} from "react-redux";
-import MessageBoxComponent from "./MessageBox.component";
+import { connect } from 'react-redux';
+import MessageBoxComponent from './MessageBox.component';
 
 const mapStateToProps = state => {
-    const {error} = state;
-    if (!!error) {
-        return {
-            error: true,
-            message: error.message
-        }
-    }
+  const { error } = state;
+  if (!!error) {
     return {
-        error: false,
-        message: '',
+      error: true,
+      message: error.message
     };
+  }
+  return {
+    error: false,
+    message: ''
+  };
 };
 
 const MessageBoxContainer = connect(
